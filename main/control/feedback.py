@@ -11,7 +11,6 @@ import util
 
 from main import app
 
-
 class FeedbackForm(wtf.Form):
   message = wtforms.TextAreaField(
       'Message',

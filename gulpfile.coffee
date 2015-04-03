@@ -7,7 +7,12 @@ exec = require('child_process').exec
 merge = require 'merge-stream'
 minimist = require 'minimist'
 
-$ = do require 'gulp-load-plugins'
+$ = require('gulp-load-plugins')(
+  rename:
+    'gulp-ng-classify': 'ngClassify'
+    'gulp-angular-filesort': 'ngFileSort'
+    'gulp-angular-templatecache': 'ngTemplates'
+)
 
 
 dir_bower_components = 'bower_components'
@@ -33,17 +38,12 @@ dir_storage = "#{dir_temp}/storage"
 
 paths =
   ext: [
-      "#{dir_ext}/jquery/dist/jquery.js"
+      "#{dir_ext}/angular/angular.js"
+      "#{dir_ext}/angular-route/angular-route.js"
       "#{dir_ext}/moment/moment.js"
-      "#{dir_ext}/nprogress/nprogress.js"
-      "#{dir_ext}/bootstrap/js/alert.js"
-      "#{dir_ext}/bootstrap/js/button.js"
-      "#{dir_ext}/bootstrap/js/transition.js"
-      "#{dir_ext}/bootstrap/js/collapse.js"
-      "#{dir_ext}/bootstrap/js/dropdown.js"
-      "#{dir_ext}/bootstrap/js/tooltip.js"
     ]
   clean: [
+      dir_build
       dir_ext
       dir_min
       './**/*.pyc'
@@ -64,13 +64,11 @@ paths =
       "#{dir_style}/style.less"
     ]
   script: [
-      "#{dir_build}/script/common/api.js"
-      "#{dir_build}/script/common/util.js"
-      "#{dir_build}/script/site/admin.js"
-      "#{dir_build}/script/site/auth.js"
-      "#{dir_build}/script/site/user.js"
-      "#{dir_build}/script/site/app.js"
+      "#{dir_build}/script/**/*.js"
     ]
+  templates: [
+      "#{dir_script}/app/**/*.html"
+  ]
   watch: [
       "#{dir_static}/**/*.css"
       "#{dir_static}/**/*.js"
@@ -89,6 +87,7 @@ gulp.task 'script', false, ->
   gulp.src "#{dir_script}/**/*.coffee"
     .pipe $.plumber(errorHandler: onError)
     .pipe do $.sourcemaps.init
+    .pipe do $.ngClassify
     .pipe $.coffee()
     .pipe do $.sourcemaps.write
     .pipe gulp.dest "#{dir_build}/script"
@@ -104,17 +103,26 @@ gulp.task 'style', false, ->
     .pipe gulp.dest "#{dir_build}/style"
 
 
+gulp.task 'templates', ->
+  gulp.src(paths.templates)
+    .pipe $.plumber(errorHandler: onError)
+    .pipe $.ngTemplates(
+      module: 'app'
+    )
+    .pipe gulp.dest("#{dir_build}/script/app")
+
+
 gulp.task 'inject', false, ->
   gulp.src("#{dir_main}/templates/bit/script.html")
-    .pipe $.plumber()
-    .pipe $.inject(gulp.src(paths.script),
-      name: 'script'
+    .pipe $.plumber(errorHandler: onError)
+    .pipe $.inject(gulp.src(paths.ext),
+      name: 'ext'
       addRootSlash: false
       ignorePath: 'main/static'
       addPrefix: '/p'
     )
-    .pipe $.inject(gulp.src(paths.ext),
-      name: 'ext'
+    .pipe $.inject(gulp.src(paths.script).pipe($.ngFileSort()),
+      name: 'script'
       addRootSlash: false
       ignorePath: 'main/static'
       addPrefix: '/p'
@@ -162,7 +170,7 @@ gulp.task 'ext_install', false, ['bower'], ->
 gulp.task 'build',
   "Compiles styles & scripts files into minified version
   and pack python dependencies into #{file_lib}.",
-  $.sequence 'clean', 'install_dependencies', ['script', 'style', 'zip'], 'inject'
+  $.sequence 'clean', 'install_dependencies', ['script', 'style', 'templates','zip'], 'inject'
 
 
 gulp.task 'rebuild',
@@ -187,6 +195,7 @@ gulp.task 'watch', false, ->
   gulp.watch 'package.json', ['npm']
   gulp.watch 'bower.json', ['ext_watch_rebuild']
   gulp.watch "#{dir_script}/**/*.coffee", ['script']
+  gulp.watch "#{dir_script}/**/*.html", ['templates']
   gulp.watch "#{dir_style}/**/*.less", ['style']
 
 
@@ -250,7 +259,7 @@ gulp.task 'run',
 -o HOST - the host to start the dev_appserver.py\n
 -p PORT - the port to start the dev_appserver.py\n
 -a="..." - all following args are passed to dev_appserver.py\n', ->
-  $.sequence('install_dependencies', ['script', 'style'], 'inject') ->
+  $.sequence('install_dependencies', ['script', 'style', 'templates'], 'inject') ->
     argv = process.argv.slice 2
 
     known_options =

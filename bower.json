@@ -1,16 +1,16 @@
 {
   "name": "gae-init",
   "dependencies": {
+    "angular": "~1",
+    "angular-route": "~1",
     "bootstrap": "~3",
     "font-awesome": "~4",
-    "jquery": "~2",
     "lesshat": "~3",
-    "moment": "~2",
-    "nprogress": "https://github.com/lipis/nprogress.git#master"
+    "moment": "~2"
   },
   "overrides": {
     "bootstrap": {
-      "main": ["less/**", "fonts/*", "js/*"]
+      "main": ["less/**", "fonts/*"]
     },
     "font-awesome": {
       "main": ["less/*", "fonts/*"]

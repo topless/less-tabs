@@ -7,14 +7,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{url_for('welcome')}}">{{header.CONFIG_DB.brand_name}}</a>
+      <a href="" class="navbar-brand" ng-click="header.gotoWelcome()">
+        {{header.CONFIG_DB.brand_name}}
+      </a>
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        # include 'bit/contact_menu.html'
+        <li>
+          <a href="" ng-click="header.gotoFeedback()">
+            <span class="fa fa-comment"></span> Feedback
+          </a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        # include 'bit/user_menu.html'
+        <li>
+          <a href="">User Menu</a>
+        </li>
       </ul>
     </nav>
   </div>
