@@ -44,6 +44,7 @@ paths =
       "#{dir_ext}/angular-route/angular-route.js"
       "#{dir_ext}/angular-bootstrap-show-errors/src/showErrors.js"
       "#{dir_ext}/angular-ladda/dist/angular-ladda.min.js"
+      "#{dir_ext}/angular-ui-bootstrap/src/dropdown/dropdown.js"
       "#{dir_ext}/moment/moment.js"
     ]
   clean: [

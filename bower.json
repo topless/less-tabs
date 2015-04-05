@@ -5,6 +5,7 @@
     "angular-route": "~1",
     "angular-bootstrap-show-errors": "~2",
     "angular-ladda": "~0",
+    "angular-ui-bootstrap": "~0",
     "bootstrap": "~3",
     "font-awesome": "~4",
     "lesshat": "~3",
@@ -17,6 +18,11 @@
       "main": [
         "less/**",
         "fonts/*"
+      ]
+    },
+    "angular-ui-bootstrap": {
+      "main": [
+        "src/*/*.js"
       ]
     },
     "font-awesome": {

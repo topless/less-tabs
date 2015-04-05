@@ -3,6 +3,7 @@ class App extends App
     return [
       'ngRoute'
       'angular-ladda'
+      'ui.bootstrap.dropdown'
       'ui.bootstrap.showErrors'
     ]
 
