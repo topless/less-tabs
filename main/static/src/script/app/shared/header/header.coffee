@@ -1,14 +1,30 @@
 class Header extends Controller
-  constructor: (@$location, @CONFIG_DB) ->
 
-  gotoFeedback: ->
-    @$location.path('/feedback/')
+  constructor: (@$scope, @$location, @CONFIG_DB) ->
+    @activeButtons()
+    @buttons =
+      welcome:
+        active: ''
+        url: '/'
+      feedback:
+        active: ''
+        url: '/feedback/'
+      signin:
+        active: ''
+        url: '/signin/'
 
-  gotoWelcome: ->
-    @$location.path('/')
+  activeButtons: ->
+    @$scope.$on '$routeChangeStart', (next, current) =>
+      for name, btn of @buttons
+        btn.active = ''
+        if btn.url is @$location.url() then btn.active = 'active'
+
+  goto: (url) ->
+    @$location.path(url)
 
 
 class AppHeader extends Directive
+
   constructor: ->
     header =
       restrict: 'A'

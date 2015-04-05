@@ -15,6 +15,10 @@ class Routes extends Config
         templateUrl: 'components/welcome/welcome.html'
         controller: 'welcomeController'
         controllerAs: 'welcome'
+      .when '/signin/',
+        templateUrl: 'components/auth/signin.html'
+        controller: 'authController'
+        controllerAs: 'auth'
       .when '/feedback/',
         templateUrl: 'components/feedback/feedback.html'
         controller: 'feedbackController'
