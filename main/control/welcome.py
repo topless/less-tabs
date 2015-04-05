@@ -17,10 +17,10 @@ import json
 @app.route('/<path:path>')
 def welcome(path=None):
   user_db = auth.current_user_db()
-  if not user_db:
-    return flask.redirect(flask.url_for('signin'))
+  # if not user_db:
+  #   return flask.redirect(flask.url_for('signin'))
   return flask.render_template('base.html',
-    config_db=json.dumps(restful.marshal(config.CONFIG_DB, model.Config.FIELDS)),
+    config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
   )
 
 

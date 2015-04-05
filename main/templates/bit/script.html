@@ -1,3 +1,11 @@
+<script type="text/javascript" id="config-db">
+  // When angular copies these values it removes em from window obj.
+  window.flask_data = {};
+  # if config_db
+    window.flask_data.config_db = JSON.parse('{{config_db|tojson}}');
+  # endif
+</script>
+
 <!-- The development scripts are generated automatically from gulp -->
 # if config.DEVELOPMENT
   <script src="http://{{request.host.split(':')[0]}}:35729/livereload.js"></script>
@@ -12,19 +20,13 @@
   <!-- endinject -->
   <!-- script:js -->
   <script src="/p/build/script/app/app.js"></script>
-  <script src="/p/build/script/app/shared/header/header.js"></script>
-  <script src="/p/build/script/app/shared/footer/footer.js"></script>
   <script src="/p/build/script/app/components/welcome/welcome_ctrl.js"></script>
   <script src="/p/build/script/app/components/feedback/feedback_ctrl.js"></script>
+  <script src="/p/build/script/app/shared/header/header.js"></script>
+  <script src="/p/build/script/app/shared/footer/footer.js"></script>
   <script src="/p/build/script/app/templates.js"></script>
   <!-- endinject -->
 # else
   <script src="/p/min/script/ext.js?{{config.CURRENT_VERSION_ID}}"></script>
   <script src="/p/min/script/script.js?{{config.CURRENT_VERSION_ID}}"></script>
 # endif
-
-<script type="text/javascript">
-  # if config_db
-    angular.module('app').constant('CONFIG_DB', JSON.parse({{config_db|tojson}}));
-  # endif
-</script>

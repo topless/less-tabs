@@ -78,6 +78,7 @@ paths =
       "#{dir_static}/**/*.js"
       "#{dir_main}/**/*.html"
       "#{dir_main}/**/*.py"
+      "!#{dir_main}/lib"
     ]
 
 
