@@ -4,3 +4,29 @@
     <h1>Feedback <small>Any questions or suggestions are welcome</small></h1>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-sm-6">
+
+      <form name="feedbackForm" novalidate>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="message">Message</label>
+          <textarea ng-model="feedback.message" required autofocus class="form-control"
+              id="message" name="message" rows="8"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="email">Your email</label>
+          <small class="text-muted">(optional)</small>
+          <input  ng-model="feedback.email" class="form-control" id="email" name="email" type="email">
+        </div>
+
+        <button ladda="feedback.isLoading" ng-click="feedback.send()" class="btn btn-primary btn-block">
+          Send Feedback
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>

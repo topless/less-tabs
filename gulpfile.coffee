@@ -38,8 +38,12 @@ dir_storage = "#{dir_temp}/storage"
 
 paths =
   ext: [
+      "#{dir_ext}/spinjs/spin.js"
+      "#{dir_ext}/ladda/dist/ladda.min.js"
       "#{dir_ext}/angular/angular.js"
       "#{dir_ext}/angular-route/angular-route.js"
+      "#{dir_ext}/angular-bootstrap-show-errors/src/showErrors.js"
+      "#{dir_ext}/angular-ladda/dist/angular-ladda.min.js"
       "#{dir_ext}/moment/moment.js"
     ]
   clean: [

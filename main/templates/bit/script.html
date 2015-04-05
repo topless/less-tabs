@@ -2,8 +2,12 @@
 # if config.DEVELOPMENT
   <script src="http://{{request.host.split(':')[0]}}:35729/livereload.js"></script>
   <!-- ext:js -->
+  <script src="/p/build/ext/spinjs/spin.js"></script>
+  <script src="/p/build/ext/ladda/dist/ladda.min.js"></script>
   <script src="/p/build/ext/angular/angular.js"></script>
   <script src="/p/build/ext/angular-route/angular-route.js"></script>
+  <script src="/p/build/ext/angular-bootstrap-show-errors/src/showErrors.js"></script>
+  <script src="/p/build/ext/angular-ladda/dist/angular-ladda.min.js"></script>
   <script src="/p/build/ext/moment/moment.js"></script>
   <!-- endinject -->
   <!-- script:js -->
@@ -20,5 +24,7 @@
 # endif
 
 <script type="text/javascript">
-  angular.module('app').constant('CONFIG_DB', JSON.parse({{config_db|tojson}}));
+  # if config_db
+    angular.module('app').constant('CONFIG_DB', JSON.parse({{config_db|tojson}}));
+  # endif
 </script>

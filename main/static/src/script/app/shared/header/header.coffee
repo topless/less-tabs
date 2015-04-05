@@ -2,7 +2,7 @@ class Header extends Controller
   constructor: (@$location, @CONFIG_DB) ->
 
   gotoFeedback: ->
-    @$location.path('/feedback')
+    @$location.path('/feedback/')
 
   gotoWelcome: ->
     @$location.path('/')
