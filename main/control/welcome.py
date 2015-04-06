@@ -19,8 +19,10 @@ def welcome(path=None):
   user_db = auth.current_user_db()
   # if not user_db:
   #   return flask.redirect(flask.url_for('signin'))
+
   return flask.render_template('base.html',
     config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
+    **auth.urls_for_oauth('/')
   )
 
 

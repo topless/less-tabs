@@ -5,7 +5,7 @@
     "angular-route": "~1",
     "angular-bootstrap-show-errors": "~2",
     "angular-ladda": "~0",
-    "angular-ui-bootstrap": "~0",
+    "angular-bootstrap": "~0",
     "bootstrap": "~3",
     "font-awesome": "~4",
     "lesshat": "~3",
@@ -22,7 +22,7 @@
     },
     "angular-ui-bootstrap": {
       "main": [
-        "src/*/*.js"
+        "*.js"
       ]
     },
     "font-awesome": {
@@ -31,5 +31,8 @@
         "fonts/*"
       ]
     }
+  },
+  "resolutions": {
+    "angular": "~1"
   }
 }

@@ -3,7 +3,7 @@ class App extends App
     return [
       'ngRoute'
       'angular-ladda'
-      'ui.bootstrap.dropdown'
+      'ui.bootstrap'
       'ui.bootstrap.showErrors'
     ]
 
@@ -15,10 +15,6 @@ class Routes extends Config
         templateUrl: 'components/welcome/welcome.html'
         controller: 'welcomeController'
         controllerAs: 'welcome'
-      .when '/signin/',
-        templateUrl: 'components/auth/signin.html'
-        controller: 'authController'
-        controllerAs: 'auth'
       .when '/feedback/',
         templateUrl: 'components/feedback/feedback.html'
         controller: 'feedbackController'
@@ -53,9 +49,15 @@ HTMLCollection::remove = ->
   return
 
 
+class AUTH_URLS extends Constant
+  constructor: ->
+    auth_urls = angular.copy(window.flask_data.auth_urls)
+    return auth_urls
+
+
 class CONFIG_DB extends Constant
   constructor: ->
     config_db = angular.copy(window.flask_data.config_db)
-    document.getElementById("config-db").remove()
-    delete window.flask_data.config_db
+    # document.getElementById("config-db").remove()
+    # delete window.flask_data
     return config_db

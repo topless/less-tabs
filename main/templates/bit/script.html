@@ -4,6 +4,20 @@
   # if config_db
     window.flask_data.config_db = JSON.parse('{{config_db|tojson}}');
   # endif
+  window.flask_data.auth_urls = {
+    bitbucket_signin_url: '{{bitbucket_signin_url}}',
+    dropbox_signin_url: '{{dropbox_signin_url}}',
+    facebook_signin_url: '{{facebook_signin_url}}',
+    github_signin_url: '{{github_signin_url}}',
+    google_signin_url: '{{google_signin_url}}',
+    gae_signin_url: '{{gae_signin_url}}',
+    instagram_signin_url: '{{instagram_signin_url}}',
+    linkedin_signin_url: '{{linkedin_signin_url}}',
+    microsoft_signin_url: '{{microsoft_signin_url}}',
+    twitter_signin_url: '{{twitter_signin_url}}',
+    vk_signin_url: '{{vk_signin_url}}',
+    yahoo_signin_url: '{{yahoo_signin_url}}'
+  }
 </script>
 
 <!-- The development scripts are generated automatically from gulp -->
@@ -13,10 +27,10 @@
   <script src="/p/build/ext/spinjs/spin.js"></script>
   <script src="/p/build/ext/ladda/dist/ladda.min.js"></script>
   <script src="/p/build/ext/angular/angular.js"></script>
+  <script src="/p/build/ext/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="/p/build/ext/angular-route/angular-route.js"></script>
   <script src="/p/build/ext/angular-bootstrap-show-errors/src/showErrors.js"></script>
   <script src="/p/build/ext/angular-ladda/dist/angular-ladda.min.js"></script>
-  <script src="/p/build/ext/angular-ui-bootstrap/src/dropdown/dropdown.js"></script>
   <script src="/p/build/ext/moment/moment.js"></script>
   <!-- endinject -->
   <!-- script:js -->

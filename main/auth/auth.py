@@ -391,10 +391,8 @@ def signin_user_db(user_db):
   flask.session.pop('auth-params', None)
   if login.login_user(flask_user_db, remember=auth_params['remember']):
     user_db.put_async()
-    flask.flash('Hello %s, welcome to %s.' % (
-        user_db.name, config.CONFIG_DB.brand_name,
-      ), category='success')
-    return flask.redirect(util.get_next_url(auth_params['next']))
+    # TODO: here goes the next url, temporary override with welcome
+    return flask.redirect(flask.url_for('welcome'))
   flask.flash('Sorry, but you could not sign in.', category='danger')
   return flask.redirect(flask.url_for('signin'))
 
