@@ -34,7 +34,7 @@ Initializing or Reseting the project
 
 If something goes wrong you can always do:
 
-    $ gulp init
+    $ gulp reset
     $ npm install
     $ gulp
 
@@ -47,11 +47,10 @@ To install [Gulp][] as a global package:
 Deploying on Google App Engine
 ------------------------------
 
-Before deploying make sure that the `app.yaml` and `config.py` are up to date
-and you ran the `gulp` to build and minify all the related files:
+    $ gulp deploy
 
-    $ gulp build
-    $ appcfg.py update main
+Before deploying make sure that the `main/app.yaml` and `gulp/config.coffee`
+are up to date.
 
 Tech Stack
 ----------

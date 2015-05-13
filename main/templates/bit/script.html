@@ -20,29 +20,13 @@
   }
 </script>
 
-<!-- The development scripts are generated automatically from gulp -->
 # if config.DEVELOPMENT
+  <script src="/p/dev/script/ext.js?{{config.CURRENT_VERSION_ID}}"></script>
+  <script src="/p/dev/script/script.js?{{config.CURRENT_VERSION_ID}}"></script>
+  <script src="/p/dev/script/templates.js?{{config.CURRENT_VERSION_ID}}"></script>
   <script src="http://{{request.host.split(':')[0]}}:35729/livereload.js"></script>
-  <!-- ext:js -->
-  <script src="/p/build/ext/spinjs/spin.js"></script>
-  <script src="/p/build/ext/ladda/dist/ladda.min.js"></script>
-  <script src="/p/build/ext/angular/angular.js"></script>
-  <script src="/p/build/ext/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="/p/build/ext/angular-route/angular-route.js"></script>
-  <script src="/p/build/ext/angular-bootstrap-show-errors/src/showErrors.js"></script>
-  <script src="/p/build/ext/angular-ladda/dist/angular-ladda.min.js"></script>
-  <script src="/p/build/ext/moment/moment.js"></script>
-  <!-- endinject -->
-  <!-- script:js -->
-  <script src="/p/build/script/app/app.js"></script>
-  <script src="/p/build/script/app/shared/header/header.js"></script>
-  <script src="/p/build/script/app/shared/footer/footer.js"></script>
-  <script src="/p/build/script/app/components/welcome/welcome_ctrl.js"></script>
-  <script src="/p/build/script/app/components/feedback/feedback_ctrl.js"></script>
-  <script src="/p/build/script/app/components/auth/auth_ctrl.js"></script>
-  <script src="/p/build/script/app/templates.js"></script>
-  <!-- endinject -->
 # else
   <script src="/p/min/script/ext.js?{{config.CURRENT_VERSION_ID}}"></script>
   <script src="/p/min/script/script.js?{{config.CURRENT_VERSION_ID}}"></script>
+  <script src="/p/min/script/templates.js?{{config.CURRENT_VERSION_ID}}"></script>
 # endif

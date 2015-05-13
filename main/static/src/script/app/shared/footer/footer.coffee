@@ -6,7 +6,7 @@ class AppFooter extends Directive
   constructor: ->
     footer =
       restrict: 'A'
-      templateUrl: 'shared/footer/footer.html'
+      templateUrl: 'app/shared/footer/footer.html'
       controller: 'footerController'
       controllerAs: 'footer'
     return footer

@@ -12,11 +12,11 @@ class Routes extends Config
   constructor: ($routeProvider) ->
     $routeProvider
       .when '/',
-        templateUrl: 'components/welcome/welcome.html'
+        templateUrl: 'app/components/welcome/welcome.html'
         controller: 'welcomeController'
         controllerAs: 'welcome'
       .when '/feedback/',
-        templateUrl: 'components/feedback/feedback.html'
+        templateUrl: 'app/components/feedback/feedback.html'
         controller: 'feedbackController'
         controllerAs: 'feedback'
       .otherwise
