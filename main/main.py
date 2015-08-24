@@ -25,7 +25,8 @@ from api import helpers
 api_v1 = helpers.Api(app, prefix='/api/v1')
 
 import api.v1
-
+from flask_util_js import FlaskUtilJs
+fujs = FlaskUtilJs(app)
 
 if config.DEVELOPMENT:
   from werkzeug import debug
