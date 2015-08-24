@@ -7,7 +7,7 @@ paths = require '../paths'
 gulp.task 'build',
   "Build project to prepare it for a deployment. Minify CSS & JS files and pack
   Python dependencies into #{paths.py.lib_file}.",
-  $.sequence 'clean:venv', 'clean', 'install_dependencies', 'ext', ['script', 'style',  'templates', 'zip']
+  $.sequence 'clean:venv', 'clean:min', 'clean', 'install_dependencies', 'ext', ['script', 'style',  'templates', 'zip']
 
 
 gulp.task 'rebuild',
@@ -20,7 +20,7 @@ gulp.task 'deploy', 'Deploy project to Google App Engine.', ['build'], ->
   delete options['_']
   options_str = '--skip_sdk_update_check'
   for k of options
-    if options[k] == true
+    if options[k] is true
       options[k] = ''
     options_str += if k.length > 1 then " --#{k} #{options[k]}" else " -#{k} #{options[k]}"
 
@@ -48,7 +48,7 @@ gulp.task 'run',
       options_str = '-s'
       for k of known_options.default
         if options[k]
-          if k == 'a'
+          if k is 'a'
             options_str += " --appserver-args \"#{options[k]}\""
           else
             options_str += " -#{k} #{options[k]}"
