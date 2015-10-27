@@ -8,27 +8,20 @@
     "angular-bootstrap": "~0",
     "bootstrap": "~3",
     "font-awesome": "~4",
+    "jquery": "~2",
     "moment": "~2",
     "ladda": "~0",
     "spinjs": "~2"
   },
   "overrides": {
     "bootstrap": {
-      "main": [
-        "less/**",
-        "fonts/*"
-      ]
+      "main": ["less/**", "fonts/*", "js/{transition,collapse}.js"]
     },
     "angular-ui-bootstrap": {
-      "main": [
-        "*.js"
-      ]
+      "main": ["*.js"]
     },
     "font-awesome": {
-      "main": [
-        "less/*",
-        "fonts/*"
-      ]
+      "main": ["less/*", "fonts/*"]
     }
   },
   "resolutions": {
