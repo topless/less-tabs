@@ -18,8 +18,17 @@ def welcome(path=None):
   if not user_db:
     return flask.redirect(flask.url_for('signin'))
 
+  return flask.render_template('welcome.html', html_class='welcome')
+
+
+@app.route('/ang')
+def ang(path=None):
+  user_db = auth.current_user_db()
+  if not user_db:
+    return flask.redirect(flask.url_for('signin'))
+
   return flask.render_template(
-    'welcome.html',
+    'index.html',
     config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
   )
 

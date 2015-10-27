@@ -9,7 +9,7 @@ class App extends App
 class Routes extends Config
   constructor: ($routeProvider) ->
     $routeProvider
-      .when '/',
+      .when '/ang',
         templateUrl: 'app/components/welcome/welcome.html'
         controller: 'welcomeController'
         controllerAs: 'welcome'
@@ -17,8 +17,6 @@ class Routes extends Config
         templateUrl: 'app/components/feedback/feedback.html'
         controller: 'feedbackController'
         controllerAs: 'feedback'
-      .otherwise
-        redirectTo: '/'
 
 
 class Location extends Config

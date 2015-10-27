@@ -13,14 +13,11 @@
     "bootstrap": {
       "main": ["less/**", "fonts/*", "js/*.js"]
     },
-    "angular-ui-bootstrap": {
+    "angular-bootstrap": {
       "main": ["*.js"]
     },
     "font-awesome": {
       "main": ["less/*", "fonts/*"]
     }
-  },
-  "resolutions": {
-    "angular": "~1"
   }
 }
