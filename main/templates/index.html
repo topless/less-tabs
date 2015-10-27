@@ -12,21 +12,14 @@
     # block head
     # endblock
     # include 'bit/analytics.html'
+    <base href="/">
   </head>
 
-  <body>
-    # include 'bit/header.html'
-    # include 'bit/announcement.html'
-    # block header
-    # endblock
-    <div class="container">
-      # include 'bit/notifications.html'
-      # block content
-      # endblock
-    </div>
-    # include 'bit/footer.html'
+  <body ng-app="app">
+    <div app-header></div>
+    <div ng-view></div>
+    <div app-footer></div>
+    {{flask_util_js.js}}
     # include 'bit/script.html'
-    # block scripts
-    # endblock
   </body>
 </html>

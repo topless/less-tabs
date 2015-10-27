@@ -7,22 +7,20 @@ import config
 import auth
 import model
 from main import app
-import logging
-import json
+
 
 ###############################################################################
 # Welcome
 ###############################################################################
 @app.route('/')
-@app.route('/<path:path>')
 def welcome(path=None):
   user_db = auth.current_user_db()
-  # if not user_db:
-  #   return flask.redirect(flask.url_for('signin'))
+  if not user_db:
+    return flask.redirect(flask.url_for('signin'))
 
-  return flask.render_template('base.html',
+  return flask.render_template(
+    'welcome.html',
     config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
-    **auth.urls_for_oauth('/')
   )
 
 

@@ -11,7 +11,7 @@
   },
   "overrides": {
     "bootstrap": {
-      "main": ["less/**", "fonts/*", "js/{transition,collapse}.js"]
+      "main": ["less/**", "fonts/*", "js/*.js"]
     },
     "angular-ui-bootstrap": {
       "main": ["*.js"]
