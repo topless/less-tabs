@@ -1,3 +1,4 @@
 class Welcome extends Controller
 
-  constructor: (@CONFIG_DB) ->
+  constructor: ->
+    console.info 'Welcome ctrl'

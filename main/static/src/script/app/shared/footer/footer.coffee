@@ -1,5 +1,6 @@
 class Footer extends Controller
-  constructor: (@CONFIG_DB) ->
+  constructor: ->
+    console.info 'Hello footer'
 
 
 class AppFooter extends Directive
