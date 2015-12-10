@@ -34,7 +34,7 @@ gulp.task 'run',
   -o HOST  - the host to start the dev_appserver.py\n
   -p PORT  - the port to start the dev_appserver.py\n
   -a="..." - all following args are passed to dev_appserver.py\n', ->
-    $.sequence('install_dependencies', ['ext:dev', 'script:dev', 'style:dev', 'templates:dev']) ->
+    $.sequence('init', ['ext:dev', 'script:dev', 'style:dev', 'templates:dev']) ->
       argv = process.argv.slice 2
 
       known_options =
