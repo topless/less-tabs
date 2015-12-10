@@ -1,5 +1,4 @@
 $ ->
-  console.info 'Rofl'
   init_common()
 
 $ -> $('html.welcome').each ->
