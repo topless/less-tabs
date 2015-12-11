@@ -11,6 +11,9 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
+        <li class="{{'active' if html_class == 'run-list'}}">
+          <a href="{{url_for('run_list')}}"><span class="fa fa-fw fa-play-circle"></span> Run List</a>
+        </li>
         # include 'bit/contact_menu.html'
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -7,3 +7,4 @@ from .error import *
 from .profile import *
 from .test import *
 from .welcome import *
+from .run import *
