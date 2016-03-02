@@ -16,7 +16,6 @@ class Feedback(model.Base):
   message = ndb.TextProperty(required=True)
   email = ndb.StringProperty(default='')
 
-
   FIELDS = {
       'message': fields.String,
       'email': fields.String,
