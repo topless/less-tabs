@@ -1,6 +1,6 @@
 class Header extends Controller
 
-  constructor: ->
+  constructor: (@USER_DB) ->
     console.info 'Header controller'
 
 
@@ -8,7 +8,7 @@ class AppHeader extends Directive
 
   constructor: ->
     header =
-      restrict: 'A'
+      restrict: 'E'
       templateUrl: 'app/shared/header/header.html'
       controller: 'headerController'
       controllerAs: 'header'

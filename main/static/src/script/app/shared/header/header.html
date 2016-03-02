@@ -1,3 +1,4 @@
+
 <header class="navbar navbar-default navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -21,11 +22,16 @@
         </li>
       </ul>
 
-      <!-- Show only if user is signed in -->
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a ng-click="header.openSigninModal()">
+        <li ng-show="!header.USER_DB">
+          <a href="/signin" target="_self">
             <span class="fa fa-sign-in"></span> Sign in
+          </a>
+        </li>
+
+        <li ng-show="header.USER_DB">
+          <a href="/signout" target="_self">
+            <span class="fa fa-sign-out"></span> Sign Out
           </a>
         </li>
       </ul>

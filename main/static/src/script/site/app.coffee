@@ -1,9 +1,6 @@
 $ ->
   init_common()
 
-$ -> $('html.welcome').each ->
-  LOG('init welcome')
-
 $ -> $('html.auth').each ->
   init_auth()
 

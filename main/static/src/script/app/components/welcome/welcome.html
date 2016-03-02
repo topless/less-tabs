@@ -1,11 +1,19 @@
 <!-- welcomeController as welcome -->
+
 <div class="jumbotron">
   <div class="container">
     <h1>{{welcome.CONFIG_DB.brand_name}}</h1>
-    <p>Hello, Angular world!</p>
+
+    <p ng-show="!welcome.USER_DB">
+      Hello, Anonymous Angular!
+    </p>
+
+    <p ng-show="welcome.USER_DB">
+      Hello, <strong>{{welcome.USER_DB.name}}</strong>!! You are logged in
+    </p>
+
   </div>
 </div>
-
 
 <div class="container">
   <div class="row">

@@ -1,4 +1,4 @@
 class Welcome extends Controller
 
-  constructor: ->
-    console.info 'Welcome ctrl'
+  constructor: (@USER_DB) ->
+    console.info 'Welcome user: ', @USER_DB

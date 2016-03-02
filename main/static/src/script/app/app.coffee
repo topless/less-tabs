@@ -9,7 +9,7 @@ class App extends App
 class Routes extends Config
   constructor: ($routeProvider) ->
     $routeProvider
-      .when '/ang',
+      .when '/',
         templateUrl: 'app/components/welcome/welcome.html'
         controller: 'welcomeController'
         controllerAs: 'welcome'
@@ -17,6 +17,8 @@ class Routes extends Config
         templateUrl: 'app/components/feedback/feedback.html'
         controller: 'feedbackController'
         controllerAs: 'feedback'
+      .otherwise(redirectTo: '/')
+
 
 
 class Location extends Config
@@ -26,7 +28,9 @@ class Location extends Config
 
 class ConfigDB extends Constant
   constructor: ->
-    config_db = angular.copy(window.flask_data.config_db)
-    # document.getElementById("config-db").remove()
-    # delete window.flask_data
-    return config_db
+    return angular.copy(window.config_db)
+
+
+class UserDB extends Constant
+  constructor: ->
+    return angular.copy(window.user_db)

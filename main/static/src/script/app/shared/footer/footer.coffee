@@ -1,12 +1,12 @@
 class Footer extends Controller
   constructor: ->
-    console.info 'Hello footer'
+    console.info 'Footer controller'
 
 
 class AppFooter extends Directive
   constructor: ->
     footer =
-      restrict: 'A'
+      restrict: 'E'
       templateUrl: 'app/shared/footer/footer.html'
       controller: 'footerController'
       controllerAs: 'footer'

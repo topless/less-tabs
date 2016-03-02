@@ -12,27 +12,18 @@ from main import app
 ###############################################################################
 # Welcome
 ###############################################################################
-@app.route('/')
-def welcome(path=None):
-  # user_db = auth.current_user_db()
-  # if not user_db:
-  #   return flask.redirect(flask.url_for('signin'))
-  return flask.render_template('welcome.html', html_class='welcome')
-
-
-@app.route('/ang')
-def ang(path=None):
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def welcome(path):
   user_db = auth.current_user_db()
-  if not user_db:
-    return flask.redirect(flask.url_for('signin'))
-
   return flask.render_template(
     'index.html',
     config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
+    user_db=restful.marshal(user_db, model.User.FIELDS) if user_db else None,
   )
 
 
-###############################################################################
+#############################################################
 # Sitemap stuff
 ###############################################################################
 @app.route('/sitemap.xml')

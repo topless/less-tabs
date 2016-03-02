@@ -14,6 +14,18 @@ import util
 from main import api_v1
 
 
+@api_v1.resource('/user/<string:user_key>/', endpoint='api.user')
+class UserAPI(restful.Resource):
+  def get(self, user_key):
+    if not user_key or user_key == 'undefined':
+      return flask.abort(401)
+
+    user_db = ndb.Key(urlsafe=user_key).get()
+    if not user_db:
+      return flask.abort(401)
+    return helpers.make_response(user_db, model.User.FIELDS)
+
+
 @api_v1.resource('/admin/user/', endpoint='api.admin.user.list')
 class AdminUserListAPI(restful.Resource):
   @auth.admin_required
