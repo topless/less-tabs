@@ -21,12 +21,11 @@ class Routes extends Config
 
 
 class AuthInterceptor extends Factory
-  constructor: ($q, USER_DB, $location) ->
+  constructor: (USER_DB, $location) ->
     return {
       request: (config) ->
-        if USER_DB is undefined
-          $location.path('/')
         console.debug 'Auth request', USER_DB
+        if USER_DB is undefined then $location.path('/')
         return config
 
       requestError: (rejection) ->
