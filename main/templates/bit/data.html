@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  # if user_db
+    window.user_db = JSON.parse('{{user_db|tojson}}');
+  # endif
+
+  # if config_db
+    window.config_db = JSON.parse('{{config_db|tojson}}');
+  # endif
+</script>

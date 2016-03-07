@@ -9,10 +9,8 @@
       {{config.CONFIG_DB.brand_name}}
     </title>
     # include 'bit/style.html'
-    <!-- TODO: Block head might not be needed. -->
-    # block head
-    # endblock
     # include 'bit/analytics.html'
+    # include 'bit/data.html'
     <base href="/">
   </head>
 
@@ -20,6 +18,7 @@
     <app-header></app-header>
     <div ng-view></div>
     <app-footer></app-footer>
+
     {{flask_util_js.js}}
     # include 'bit/script.html'
   </body>

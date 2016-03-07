@@ -1,23 +1,17 @@
 {
   "name": "gae-init",
   "dependencies": {
-    "angular": "~1",
-    "angular-route": "~1",
     "angular-bootstrap": "~0",
+    "angular-route": "~1",
+    "angular": "~1",
     "bootstrap": "~3",
     "font-awesome": "~4",
     "jquery": "~2",
     "moment": "~2"
   },
   "overrides": {
-    "bootstrap": {
-      "main": ["less/**", "fonts/*", "js/*.js"]
-    },
-    "angular-bootstrap": {
-      "main": ["*.js"]
-    },
-    "font-awesome": {
-      "main": ["less/*", "fonts/*"]
-    }
+    "angular-bootstrap": {"main": ["*.js"]},
+    "bootstrap": {"main": ["less/**", "fonts/*", "js/*.js"]},
+    "font-awesome": {"main": ["less/*", "fonts/*"]}
   }
 }

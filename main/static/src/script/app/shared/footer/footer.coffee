@@ -1,5 +1,5 @@
 class Footer extends Controller
-  constructor: ->
+  constructor: (@CONFIG_DB) ->
     console.info 'Footer controller'
 
 
