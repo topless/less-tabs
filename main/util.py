@@ -40,7 +40,7 @@ def get_next_url(next_url=''):
   })
   next_url = next_url or args['next'] or args['next_url']
   do_not_redirect_urls = [flask.url_for(u) for u in [
-    'signin', 'signup', 'user_forgot', 'user_reset',
+    'user_forgot', 'user_reset',
   ]]
   if next_url:
     if any(url in next_url for url in do_not_redirect_urls):

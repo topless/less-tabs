@@ -6,12 +6,10 @@ import functools
 import re
 
 from flask.ext import login
-from flask.ext import wtf
 from flask.ext.oauthlib import client as oauth
 from google.appengine.ext import ndb
 import flask
 import unidecode
-import wtforms
 
 import cache
 import config
@@ -111,7 +109,7 @@ def login_required(f):
       return f(*args, **kwargs)
     if flask.request.path.startswith('/api/'):
       return flask.abort(401)
-    return flask.redirect(flask.url_for('signin', next=flask.request.url))
+    return flask.redirect(flask.url_for('welcome'))
 
   return decorated_function
 
@@ -126,7 +124,7 @@ def admin_required(f):
     if not is_logged_in() and flask.request.path.startswith('/api/'):
       return flask.abort(401)
     if not is_logged_in():
-      return flask.redirect(flask.url_for('signin', next=flask.request.url))
+      return flask.redirect(flask.url_for('welcome'))
     return flask.abort(403)
 
   return decorated_function
@@ -142,7 +140,7 @@ def cron_required(f):
     if is_logged_in() and current_user_db().admin:
       return f(*args, **kwargs)
     if not is_logged_in():
-      return flask.redirect(flask.url_for('signin', next=flask.request.url))
+      return flask.redirect(flask.url_for('welcome'))
     return flask.abort(403)
 
   return decorated_function
@@ -170,7 +168,7 @@ def permission_required(permission=None, methods=None):
       if not is_logged_in():
         if flask.request.path.startswith('/api/'):
           return flask.abort(401)
-        return flask.redirect(flask.url_for('signin', next=flask.request.url))
+        return flask.redirect(flask.url_for('welcome'))
       return flask.abort(403)
 
     return decorated_function
@@ -178,108 +176,108 @@ def permission_required(permission=None, methods=None):
   return permission_decorator
 
 
+# TODO: Kept the code below in order to port the logic to angular if possible.
 ###############################################################################
 # Sign in stuff
 ###############################################################################
-class SignInForm(wtf.Form):
-  email = wtforms.StringField(
-    'Email',
-    [wtforms.validators.required()],
-    filters=[util.email_filter],
-  )
-  password = wtforms.StringField(
-    'Password',
-    [wtforms.validators.required()],
-  )
-  remember = wtforms.BooleanField(
-    'Keep me signed in',
-    [wtforms.validators.optional()],
-  )
-  recaptcha = wtf.RecaptchaField()
-  next_url = wtforms.HiddenField()
-
-
-@app.route('/signin/', methods=['GET', 'POST'])
-def signin():
-  next_url = util.get_next_url()
-  form = None
-  if config.CONFIG_DB.has_email_authentication:
-    form = form_with_recaptcha(SignInForm())
-    save_request_params()
-    if form.validate_on_submit():
-      result = get_user_db_from_email(form.email.data, form.password.data)
-      if result:
-        cache.reset_auth_attempt()
-        return signin_user_db(result)
-      if result is None:
-        form.email.errors.append('Email or Password do not match')
-      if result is False:
-        return flask.redirect(flask.url_for('welcome'))
-    if not form.errors:
-      form.next_url.data = next_url
-
-  if form and form.errors:
-    cache.bump_auth_attempt()
-
-  return flask.render_template(
-    'auth/auth.html',
-    title='Sign in',
-    html_class='auth',
-    next_url=next_url,
-    form=form,
-    form_type='signin' if config.CONFIG_DB.has_email_authentication else '',
-    **urls_for_oauth(next_url)
-  )
+# class SignInForm(wtf.Form):
+#   email = wtforms.StringField(
+#     'Email',
+#     [wtforms.validators.required()],
+#     filters=[util.email_filter],
+#   )
+#   password = wtforms.StringField(
+#     'Password',
+#     [wtforms.validators.required()],
+#   )
+#   remember = wtforms.BooleanField(
+#     'Keep me signed in',
+#     [wtforms.validators.optional()],
+#   )
+#   recaptcha = wtf.RecaptchaField()
+#   next_url = wtforms.HiddenField()
+#
+# @app.route('/signin/', methods=['GET', 'POST'])
+# def signin():
+#   next_url = util.get_next_url()
+#   form = None
+#   if config.CONFIG_DB.has_email_authentication:
+#     form = form_with_recaptcha(SignInForm())
+#     save_request_params()
+#     if form.validate_on_submit():
+#       result = get_user_db_from_email(form.email.data, form.password.data)
+#       if result:
+#         cache.reset_auth_attempt()
+#         return signin_user_db(result)
+#       if result is None:
+#         form.email.errors.append('Email or Password do not match')
+#       if result is False:
+#         return flask.redirect(flask.url_for('welcome'))
+#     if not form.errors:
+#       form.next_url.data = next_url
+#
+#   if form and form.errors:
+#     cache.bump_auth_attempt()
+#
+#   return flask.render_template(
+#     'auth/auth.html',
+#     title='Sign in',
+#     html_class='auth',
+#     next_url=next_url,
+#     form=form,
+#     form_type='signin' if config.CONFIG_DB.has_email_authentication else '',
+#     **urls_for_oauth(next_url)
+#   )
 
 
 ###############################################################################
 # Sign up stuff
 ###############################################################################
-class SignUpForm(wtf.Form):
-  email = wtforms.StringField(
-    'Email',
-    [wtforms.validators.required(), wtforms.validators.email()],
-    filters=[util.email_filter],
-  )
-  recaptcha = wtf.RecaptchaField()
-
-
-@app.route('/signup/', methods=['GET', 'POST'])
-def signup():
-  next_url = util.get_next_url()
-  form = None
-  if config.CONFIG_DB.has_email_authentication:
-    form = form_with_recaptcha(SignUpForm())
-    save_request_params()
-    if form.validate_on_submit():
-      user_db = model.User.get_by('email', form.email.data)
-      if user_db:
-        form.email.errors.append('This email is already taken.')
-
-      if not form.errors:
-        user_db = create_user_db(
-          None,
-          util.create_name_from_email(form.email.data),
-          form.email.data,
-          form.email.data,
-        )
-        user_db.put()
-        task.activate_user_notification(user_db)
-        cache.bump_auth_attempt()
-        return flask.redirect(flask.url_for('welcome'))
-
-  if form and form.errors:
-    cache.bump_auth_attempt()
-
-  title = 'Sign up' if config.CONFIG_DB.has_email_authentication else 'Sign in'
-  return flask.render_template(
-    'auth/auth.html',
-    title=title,
-    html_class='auth',
-    next_url=next_url,
-    form=form,
-    **urls_for_oauth(next_url)
-  )
+# class SignUpForm(wtf.Form):
+#   email = wtforms.StringField(
+#     'Email',
+#     [wtforms.validators.required(), wtforms.validators.email()],
+#     filters=[util.email_filter],
+#   )
+#   recaptcha = wtf.RecaptchaField()
+#
+#
+# @app.route('/signup/', methods=['GET', 'POST'])
+# def signup():
+#   next_url = util.get_next_url()
+#   form = None
+#   if config.CONFIG_DB.has_email_authentication:
+#     form = form_with_recaptcha(SignUpForm())
+#     save_request_params()
+#     if form.validate_on_submit():
+#       user_db = model.User.get_by('email', form.email.data)
+#       if user_db:
+#         form.email.errors.append('This email is already taken.')
+#
+#       if not form.errors:
+#         user_db = create_user_db(
+#           None,
+#           util.create_name_from_email(form.email.data),
+#           form.email.data,
+#           form.email.data,
+#         )
+#         user_db.put()
+#         task.activate_user_notification(user_db)
+#         cache.bump_auth_attempt()
+#         return flask.redirect(flask.url_for('welcome'))
+#
+#   if form and form.errors:
+#     cache.bump_auth_attempt()
+#
+#   title = 'Sign up' if config.CONFIG_DB.has_email_authentication else 'Sign in'
+#   return flask.render_template(
+#     'auth/auth.html',
+#     title=title,
+#     html_class='auth',
+#     next_url=next_url,
+#     form=form,
+#     **urls_for_oauth(next_url)
+#   )
 
 
 ###############################################################################
@@ -288,7 +286,7 @@ def signup():
 @app.route('/signout/')
 def signout():
   login.logout_user()
-  return flask.redirect(util.param('next') or flask.url_for('signin'))
+  return flask.redirect(flask.url_for('welcome'))
 
 
 ###############################################################################
@@ -352,7 +350,7 @@ def signin_oauth(oauth_app, scheme=None):
       'Something went wrong with sign in. Please try again.',
       category='danger',
     )
-    return flask.redirect(flask.url_for('signin', next=util.get_next_url()))
+    return flask.redirect(flask.url_for('welcome'))
 
 
 def form_with_recaptcha(form):
@@ -403,7 +401,7 @@ def create_user_db(auth_id, name, username, email='', verified=False, **props):
 @ndb.toplevel
 def signin_user_db(user_db):
   if not user_db:
-    return flask.redirect(flask.url_for('signin'))
+    return flask.redirect(flask.url_for('welcome'))
   flask_user_db = FlaskUser(user_db)
   auth_params = flask.session.get('auth-params', {
     'next': flask.url_for('welcome'),
@@ -414,7 +412,7 @@ def signin_user_db(user_db):
     user_db.put_async()
     return flask.redirect(util.get_next_url(auth_params['next']))
   flask.flash('Sorry, but you could not sign in.', category='danger')
-  return flask.redirect(flask.url_for('signin'))
+  return flask.redirect(flask.url_for('welcome'))
 
 
 def get_user_db_from_email(email, password):

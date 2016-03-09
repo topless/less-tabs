@@ -6,11 +6,9 @@ from flask.ext import restful
 import flask
 from api import helpers
 
-import auth
 import config
 import model
 import task
-
 from main import api_v1
 
 

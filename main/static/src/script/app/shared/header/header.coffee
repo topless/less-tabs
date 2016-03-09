@@ -1,8 +1,10 @@
 class Header extends Controller
 
-  constructor: (@USER_DB) ->
+  constructor: (@CONFIG_DB, @$location, @authService) ->
     console.info 'Header controller'
-
+    @buttons =
+      welcome: url: '/', active: false
+      feedback: url: '/feedback/', active: false
 
 class AppHeader extends Directive
 

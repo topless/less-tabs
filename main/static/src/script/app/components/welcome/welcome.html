@@ -2,36 +2,14 @@
 
 <div class="jumbotron">
   <div class="container">
-    <h1>{{welcome.CONFIG_DB.brand_name}}</h1>
-
-    <p ng-show="!welcome.USER_DB">
-      Hello, Anonymous Angular!
-    </p>
-
-    <p ng-show="welcome.USER_DB">
-      Hello, <strong>{{welcome.USER_DB.name}}</strong>!! You are logged in
-    </p>
-
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="col-sm-6 col-md-12 col-lg-3">
-      <h2>Heading</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
+    <h1>
+      <span ng-if="!welcome.authService.userDB">
+        <span class="fa fa-fw fa-user-secret"></span> Hello, Anonymous!
+      </span>
+      <span ng-if="welcome.authService.userDB">
+        <span class="fa fa-fw fa-user"></span> Hello,
+        <strong>{{welcome.authService.userDB.name}}</strong>!!
+      </span>
+    </h1>
   </div>
 </div>

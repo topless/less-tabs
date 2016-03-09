@@ -2,39 +2,39 @@
 <header class="navbar navbar-default navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
+      <!-- TODO: Check what is happening in lower resolutions, handle toggle -->
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a ng-click="header.goto(header.buttons.welcome.url)" class="navbar-brand">
+      <a ng-href="{{header.buttons.welcome.url}}" class="navbar-brand">
         {{header.CONFIG_DB.brand_name}}
       </a>
     </div>
 
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <li class="{{header.buttons.feedback.active}}" ng-show="header.CONFIG_DB.feedback_email">
-          <a ng-click="header.goto(header.buttons.feedback.url)">
+        <li ng-if="header.CONFIG_DB.feedback_email" class="{{header.buttons.feedback.active}}">
+          <a ng-href="{{header.buttons.feedback.url}}">
             <span class="fa fa-comment"></span> Feedback
           </a>
         </li>
       </ul>
-
+      
+      <!-- TODO: Implement the user dropdown menu here. -->
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="!header.USER_DB">
-          <a href="/signin" target="_self">
-            <span class="fa fa-sign-in"></span> Sign in
-          </a>
+        <li ng-if="!header.authService.userDB">
+          <a href="/signin"><span class="fa fa-sign-in"></span> Sign in</a>
         </li>
-
-        <li ng-show="header.USER_DB">
+        <li ng-if="header.authService.userDB">
           <a href="/signout" target="_self">
             <span class="fa fa-sign-out"></span> Sign Out
           </a>
         </li>
       </ul>
+
     </nav>
   </div>
 </header>
