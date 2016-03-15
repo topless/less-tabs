@@ -22,18 +22,30 @@
           </a>
         </li>
       </ul>
-      
+
       <!-- TODO: Implement the user dropdown menu here. -->
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!header.authService.userDB">
+      <ul ng-if="!header.authService.userDB" class="nav navbar-nav navbar-right">
+        <li>
           <a href="/signin"><span class="fa fa-sign-in"></span> Sign in</a>
         </li>
-        <li ng-if="header.authService.userDB">
-          <a href="/signout" target="_self">
-            <span class="fa fa-sign-out"></span> Sign Out
-          </a>
+      </ul>
+      <ul ng-if="header.authService.userDB" class="nav navbar-nav navbar-right">
+        <li uib-dropdown>
+          <a href="#" uib-dropdown-toggle>{{header.authService.userDB.name}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li ng-if="header.authService.userDB.admin">
+              <a ng-href="/admin" target="_self"><span class="fa fa-lock"></span> Admin</a>
+            </li>
+            <li ng-if="header.authService.userDB.admin" class="hide">
+              <a ng-href="/search"><span class="fa fa-search"></span> Search</a>
+            </li>
+            <li>
+              <a href="/signout" target="_self"><span class="fa fa-sign-out"></span> Sign out</a>
+            </li>
+          </ul>
         </li>
       </ul>
+
 
     </nav>
   </div>
