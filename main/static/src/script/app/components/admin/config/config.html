@@ -1,0 +1,96 @@
+
+<div class="page-header">
+  <h1>
+    <small>
+      <a ng-href="{{admin.prefix}}" class="text-muted" title="{{title}}"><span class="fa fa-fw fa-chevron-left"></span></a>
+    </small>
+    Admin Config
+  </h1>
+
+  <p class="text-muted">
+    For most of the settings to be applied for everyone, you will
+    <a ng-href="https://console.developers.google.com/project/{{admin.CONFIG_DB.APPLICATION_ID}}/appengine/instances?moduleId=default&versionId={{admin.CONFIG_DB.APPLICATION_ID}}" target="_blank">
+      have to restart
+    </a> the <a href="https://developers.google.com/appengine/docs/adminconsole/instances" target="_blank">instances</a>.
+  </p>
+</div>
+
+<form novalidate>
+  <div class="row">
+    <fieldset class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="brand_name">Brand Name</label>
+        <input ng-model="admin.CONFIG_DB.brand_name" id="brand_name" name="brand_name" class="form-control" type="text">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="feedback_email">Feedback Email</label>
+        <small class="text-muted">(optional)</small>
+        <input ng-model="admin.CONFIG_DB.feedback_email" id="feedback_email" name="feedback_email" class="form-control" type="text">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="announcement_html">Announcement HTML</label>
+        <small class="text-muted">(optional)</small>
+        <textarea ng-model="admin.CONFIG_DB.announcement_html" class="form-control" id="announcement_html" name="announcement_html" rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+          <label class="control-label" for="announcement_type">Announcement Type</label>
+          <small class="text-muted">(optional)</small>
+          <select class="form-control" id="announcement_type" name="announcement_type">
+            <option selected="" value="info">Info</option>
+            <option value="warning">Warning</option>
+            <option value="success">Success</option>
+            <option value="danger">Danger</option>
+          </select>
+        </div>
+    </fieldset>
+
+    <fieldset class="col-sm-6">
+      <div class="checkbox">
+        <label>
+          <input ng-model="admin.CONFIG_DB.notify_on_new_user" name="notify_on_new_user" type="checkbox"> Send an email notification when a user signs up
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input ng-model="admin.CONFIG_DB.verify_email" name="verify_email" type="checkbox"> Verify user emails
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input ng-model="admin.CONFIG_DB.check_unique_email" name="check_unique_email" type="checkbox"> Check for uniqueness of the verified emails
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input ng-model="admin.CONFIG_DB.email_authentication" name="email_authentication" type="checkbox"> Email authentication for sign in/sign up
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input ng-model="admin.CONFIG_DB.anonymous_recaptcha" name="anonymous_recaptcha" type="checkbox"> Use reCAPTCHA in forms for unauthorized users
+        </label>
+      </div>
+
+      <div class="panel-group">
+        <admin-panel template-url="config/panel/security.html"></admin-panel>
+        <admin-panel template-url="config/panel/letsencrypt.html"></admin-panel>
+        <admin-panel template-url="config/panel/google_analytics.html"></admin-panel>
+        <admin-panel template-url="config/panel/recaptcha.html"></admin-panel>
+      </div>
+    </fieldset>
+  </div>
+
+  <hr>
+  
+  <!-- TODO: Connect the submit button with the /api/config ;) -->
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Update Config
+      </button>
+    </div>
+  </div>
+</form>

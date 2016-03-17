@@ -6,4 +6,12 @@
   # if config_db
     window.config_db = JSON.parse('{{config_db|tojson}}');
   # endif
+  
+  # if APPLICATION_ID
+    window.APPLICATION_ID = '{{APPLICATION_ID}}';
+  # endif
+
+  # if CURRENT_VERSION_NAME
+    window.CURRENT_VERSION_NAME = '{{CURRENT_VERSION_NAME}}';
+  # endif
 </script>

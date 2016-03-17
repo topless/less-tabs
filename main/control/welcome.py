@@ -18,6 +18,8 @@ def welcome(path):
   user_db = auth.current_user_db()
   return flask.render_template(
     'index.html',
+    APPLICATION_ID = config.APPLICATION_ID,
+    CURRENT_VERSION_NAME = config.CURRENT_VERSION_NAME,
     config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
     user_db=restful.marshal(user_db, model.User.FIELDS) if user_db else None,
   )

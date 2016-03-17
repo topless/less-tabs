@@ -1,48 +1,45 @@
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-offset-3 col-md-6">
-
-      <form method="POST" action="." novalidate="">
-        <input id="csrf_token" name="csrf_token" type="hidden" value="1457522991##902e4892d2d1f9b7ba113ca0e9d6f5d129e665c4">
-        <input id="next_url" name="next_url" type="hidden" value="https://gae-init.appspot.com/">
-        <input class="hide" id="remember" name="remember" type="checkbox" value="y">
-        <div class="form-group ">
-          <label class="control-label" for="email">Email</label>
-          <input autofocus="" class="form-control input-lg" id="email" name="email" type="email" value="">
-        </div>
-
+    <form method="POST" action="." novalidate="">
+      <input id="csrf_token" name="csrf_token" type="hidden" value="1457522991##902e4892d2d1f9b7ba113ca0e9d6f5d129e665c4">
+      <input id="next_url" name="next_url" type="hidden" value="https://gae-init.appspot.com/">
+      <input class="hide" id="remember" name="remember" type="checkbox" value="y">
       <div class="form-group ">
-        <label class="control-label" for="password">Password</label>
-        <div class="input-group input-group-lg">
-          <input autocomplete="off" class="form-control" id="password" name="password" type="password" value="">
-          <span class="input-group-btn">
-            <button class="btn btn-default btn-password-show" type="button" data-target="#password" data-toggle="button" title="Show/Hide Password" tabindex="-1">
-              <span class="fa fa-eye"></span>
-            </button>
-          </span>
+        <label class="control-label" for="email">Email</label>
+        <input autofocus="" class="form-control input-lg" id="email" name="email" type="email" value="">
+      </div>
+
+    <div class="form-group ">
+      <label class="control-label" for="password">Password</label>
+      <div class="input-group input-group-lg">
+        <input autocomplete="off" class="form-control" id="password" name="password" type="password" value="">
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-password-show" type="button" data-target="#password" data-toggle="button" title="Show/Hide Password" tabindex="-1">
+            <span class="fa fa-eye"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+      
+    <div class="controls">
+      <button type="submit" class="btn btn-block btn-lg btn-primary btn-loading" data-loading-text="<span class='fa fa-spin fa-spinner'></span> Please wait..">
+        Sign in
+      </button>
+      </div>
+      <div class="form-group">
+        <div class="btn-group btn-group-justified form-control-static">
+          <a class="btn btn-link btn-xs ellipsis" href="/user/forgot/">Forgot password?</a>
+          <a class="btn btn-link btn-xs ellipsis" href="/signup/?next=https%3A%2F%2Fgae-init.appspot.com%2F">Create new account</a>
         </div>
       </div>
-        
-      <div class="controls">
-        <button type="submit" class="btn btn-block btn-lg btn-primary btn-loading" data-loading-text="<span class='fa fa-spin fa-spinner'></span> Please wait..">
-          Sign in
-        </button>
-        </div>
-        <div class="form-group">
-          <div class="btn-group btn-group-justified form-control-static">
-            <a class="btn btn-link btn-xs ellipsis" href="/user/forgot/">Forgot password?</a>
-            <a class="btn btn-link btn-xs ellipsis" href="/signup/?next=https%3A%2F%2Fgae-init.appspot.com%2F">Create new account</a>
-          </div>
-        </div>
-      </form>
-      <legend class="text-muted text-center">or</legend>
-      <p class="text-center">
-        <a class="btn btn-google btn-social" href="/signin/gae/" title="Sign in with LinkedIn" rel="nofollow" target="_self">
-          <span class="fa fa-google"></span> Sign in with Google
-        </a>
-      </p>
+    </form>
+    <legend class="text-muted text-center">or</legend>
+    <p class="text-center">
+      <a class="btn btn-google btn-social" href="/signin/gae/" title="Sign in with LinkedIn" rel="nofollow" target="_self">
+        <span class="fa fa-google"></span> Sign in with Google
+      </a>
+    </p>
 
-    </div>
   </div>
 </div>

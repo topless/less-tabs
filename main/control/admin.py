@@ -15,24 +15,24 @@ from main import app
 ###############################################################################
 # Admin Stuff
 ###############################################################################
-@app.route('/admin/')
-@auth.admin_required
-def admin():
-  localhost = None
-  if config.DEVELOPMENT and ':' in flask.request.host:
-    try:
-      parts = flask.request.host.split(':')
-      port = int(parts[1]) + 1
-      localhost = 'http://%s:%s/' % (parts[0], port)
-    except:
-      pass
-
-  return flask.render_template(
-    'admin/admin.html',
-    title='Admin',
-    html_class='admin',
-    localhost=localhost,
-  )
+# @app.route('/admin/')
+# @auth.admin_required
+# def admin():
+#   localhost = None
+#   if config.DEVELOPMENT and ':' in flask.request.host:
+#     try:
+#       parts = flask.request.host.split(':')
+#       port = int(parts[1]) + 1
+#       localhost = 'http://%s:%s/' % (parts[0], port)
+#     except:
+#       pass
+#
+#   return flask.render_template(
+#     'admin/admin.html',
+#     title='Admin',
+#     html_class='admin',
+#     localhost=localhost,
+#   )
 
 
 ###############################################################################
@@ -57,29 +57,29 @@ class ConfigUpdateForm(wtf.Form):
   verify_email = wtforms.BooleanField(model.Config.verify_email._verbose_name)
 
 
-@app.route('/admin/config/', methods=['GET', 'POST'])
-@auth.admin_required
-def admin_config():
-  config_db = model.Config.get_master_db()
-  form = ConfigUpdateForm(obj=config_db)
-  if form.validate_on_submit():
-    form.populate_obj(config_db)
-    if not config_db.flask_secret_key:
-      config_db.flask_secret_key = util.uuid()
-    if not config_db.salt:
-      config_db.salt = util.uuid()
-    config_db.put()
-    reload(config)
-    app.config.update(CONFIG_DB=config_db)
-    return flask.redirect(flask.url_for('admin'))
-
-  return flask.render_template(
-    'admin/admin_config.html',
-    title='App Config',
-    html_class='admin-config',
-    form=form,
-    api_url=flask.url_for('api.config'),
-  )
+# @app.route('/admin/config/', methods=['GET', 'POST'])
+# @auth.admin_required
+# def admin_config():
+#   config_db = model.Config.get_master_db()
+#   form = ConfigUpdateForm(obj=config_db)
+#   if form.validate_on_submit():
+#     form.populate_obj(config_db)
+#     if not config_db.flask_secret_key:
+#       config_db.flask_secret_key = util.uuid()
+#     if not config_db.salt:
+#       config_db.salt = util.uuid()
+#     config_db.put()
+#     reload(config)
+#     app.config.update(CONFIG_DB=config_db)
+#     return flask.redirect(flask.url_for('admin'))
+#
+#   return flask.render_template(
+#     'admin/admin_config.html',
+#     title='App Config',
+#     html_class='admin-config',
+#     form=form,
+#     api_url=flask.url_for('api.config'),
+#   )
 
 
 ###############################################################################
@@ -112,22 +112,22 @@ class AuthUpdateForm(wtf.Form):
   yahoo_consumer_secret = wtforms.StringField(model.Config.yahoo_consumer_secret._verbose_name, filters=[util.strip_filter])
 
 
-@app.route('/admin/auth/', methods=['GET', 'POST'])
-@auth.admin_required
-def admin_auth():
-  config_db = model.Config.get_master_db()
-  form = AuthUpdateForm(obj=config_db)
-  if form.validate_on_submit():
-    form.populate_obj(config_db)
-    config_db.put()
-    reload(config)
-    app.config.update(CONFIG_DB=config_db)
-    return flask.redirect(flask.url_for('admin'))
-
-  return flask.render_template(
-    'admin/admin_auth.html',
-    title='Auth Config',
-    html_class='admin-auth',
-    form=form,
-    api_url=flask.url_for('api.config'),
-  )
+# @app.route('/admin/auth/', methods=['GET', 'POST'])
+# @auth.admin_required
+# def admin_auth():
+#   config_db = model.Config.get_master_db()
+#   form = AuthUpdateForm(obj=config_db)
+#   if form.validate_on_submit():
+#     form.populate_obj(config_db)
+#     config_db.put()
+#     reload(config)
+#     app.config.update(CONFIG_DB=config_db)
+#     return flask.redirect(flask.url_for('admin'))
+#
+#   return flask.render_template(
+#     'admin/admin_auth.html',
+#     title='Auth Config',
+#     html_class='admin-auth',
+#     form=form,
+#     api_url=flask.url_for('api.config'),
+#   )

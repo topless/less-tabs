@@ -16,7 +16,9 @@
 
   <body ng-app="app">
     <app-header></app-header>
-    <div ng-view></div>
+    <div class="container">
+      <div ng-view></div>
+    </div>
     <app-footer></app-footer>
 
     {{flask_util_js.js}}

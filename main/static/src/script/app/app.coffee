@@ -21,7 +21,6 @@ class Routes extends Config
         templateUrl: 'app/components/feedback/feedback.html'
         controller: 'feedbackController'
         controllerAs: 'feedback'
-
       .otherwise(redirectTo: '/')
 
 
@@ -32,4 +31,8 @@ class Location extends Config
 
 class ConfigDB extends Constant
   constructor: ->
-    return angular.copy(window.config_db)
+    return angular.extend(
+      angular.copy(window.config_db)
+      {'APPLICATION_ID': angular.copy(window.APPLICATION_ID)}
+      {'CURRENT_VERSION_NAME': angular.copy(window.CURRENT_VERSION_NAME)}
+    )

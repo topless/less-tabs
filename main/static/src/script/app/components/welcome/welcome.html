@@ -1,18 +1,15 @@
-<!-- welcomeController as welcome -->
 
 <div class="jumbotron">
-  <div class="container">
-    <h1>
-      <span ng-if="!welcome.authService.userDB">
-        <span class="fa fa-fw fa-user-secret"></span> Hello, Anonymous!
-      </span>
-      <span ng-if="welcome.authService.userDB">
-        <span class="fa fa-fw fa-user"></span> Hello,
-        <strong>{{welcome.authService.userDB.name}}</strong>!!
-      </span>
-      <a href="/signin" class="btn btn-lg btn-primary" ng-if="!welcome.authService.userDB">
-        Sign In
-      </a>
-    </h1>
-  </div>
+  <h1>
+    <span ng-if="!welcome.authService.userDB">
+      <span class="fa fa-fw fa-user-secret"></span> Hello, Anonymous!
+    </span>
+    <span ng-if="welcome.authService.userDB">
+      <span class="fa fa-fw fa-user"></span> Hello,
+      <strong>{{welcome.authService.userDB.name}}</strong>!!
+    </span>
+    <a href="/signin" class="btn btn-lg btn-primary" ng-if="!welcome.authService.userDB">
+      Sign In
+    </a>
+  </h1>
 </div>

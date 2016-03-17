@@ -1,12 +1,13 @@
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="panel-title">
-      <a ng-click="panel.isCollapsed = !panel.isCollapsed">Lets Encrypt</a>
-      <span class="fa fa-check pull-right"></span>
+      <a ng-click="panel.isSSLCollpsed = !panel.isSSLCollpsed">Lets Encrypt (SSL)</a>
+      <span class="fa fa-check pull-right" ng-show="{{admin.CONFIG_DB.letsencrypt_challenge}}"></span>
     </h4>
   </div>
 
-  <div class="panel-body" uib-collapse="panel.isCollapsed">
+  <div class="panel-body" uib-collapse="panel.isSSLCollpsed">
     <div class="form-group">
       <label class="control-label" for="letsencrypt_challenge">Let's Encrypt Challenge</label>
       <small class="text-muted">(optional)</small>
