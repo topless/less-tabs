@@ -2,17 +2,16 @@
 
 class Admin extends Controller
 
-  constructor: (@CONFIG_DB, @authService) ->
-    console.info 'Admin user: ', @authService.userDB
+  constructor: ($location, @$scope, @CONFIG_DB, @authService) ->
     @prefix = '/admin'
     @items = @adminLinks()
-    
+  
+
   adminLinks: ->
     return [
         title: 'Admin'
         links: [
           {title: 'App Config', icon: 'cog', url: "#{@prefix}/config"}
-          {title: 'Auth Config', icon: 'lock', url: "#{@prefix}/auth"}
           {title: 'Test', icon: 'sliders', url: "#{@prefix}/test"}
         ]
       ,

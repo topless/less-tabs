@@ -77,6 +77,7 @@ class TestForm(wtf.Form):
   recaptcha = wtf.RecaptchaField()
 
 
+# NOTE: To be moved under angular controller
 # @app.route('/admin/test/<test>/', methods=['GET', 'POST'])
 # @app.route('/admin/test/', methods=['GET', 'POST'])
 # @auth.admin_required

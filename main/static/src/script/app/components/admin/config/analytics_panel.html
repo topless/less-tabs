@@ -3,7 +3,7 @@
   <div class="panel-heading">
     <h4 class="panel-title">
       <a ng-click="panel.isAnalyticsCollapsed = !panel.isAnalyticsCollapsed">Google Analytics</a>
-      <span class="fa fa-check pull-right" ng-show="{{admin.CONFIG_DB.analytics_id}}"></span>
+      <span class="fa fa-check pull-right" ng-show="{{config.configDB.analytics_id}}"></span>
     </h4>
   </div>
 
@@ -11,7 +11,7 @@
     <div class="form-group">
       <label class="control-label" for="analytics_id">Tracking ID</label>
       <small class="text-muted">(optional)</small>
-      <input ng-model="admin.CONFIG_DB.analytics_id" id="analytics_id" name="analytics_id" class="form-control" type="text">
+      <input ng-model="config.configDB.analytics_id" id="analytics_id" name="analytics_id" class="form-control" type="text">
     </div>
 
     <p class="help-block">

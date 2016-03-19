@@ -17,7 +17,7 @@ class Routes extends Config
         templateUrl: 'app/components/signin/signin.html'
         controller: 'signinController'
         controllerAs: 'signin'
-      .when '/feedback/',
+      .when '/feedback',
         templateUrl: 'app/components/feedback/feedback.html'
         controller: 'feedbackController'
         controllerAs: 'feedback'

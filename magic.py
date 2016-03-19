@@ -43,7 +43,7 @@ FILE_API_INIT = os.path.join(DIR_API, '__init__.py')
 
 DIR_TEMPLATES = os.path.join(DIR_MAIN, 'templates')
 # FILE_HEADER = os.path.join(DIR_TEMPLATES, 'bit', 'header.html')
-FILE_ADMIN = os.path.join(DIR_TEMPLATES, 'admin', 'admin.html')
+# FILE_ADMIN = os.path.join(DIR_TEMPLATES, 'admin', 'admin.html')
 
 
 ###############################################################################
@@ -141,7 +141,7 @@ def sync_from_magic():
   append_to(project_url, FILE_CONTROL_INIT)
   append_to(project_url, FILE_API_INIT)
   # insert_to(project_url, FILE_HEADER, '<ul class="nav navbar-nav">', 2)
-  insert_to(project_url, FILE_ADMIN, "url_for('user_list'")
+  # insert_to(project_url, FILE_ADMIN, "url_for('user_list'")
 
   for model_db in model_dbs:
     name = model_db['variable_name']

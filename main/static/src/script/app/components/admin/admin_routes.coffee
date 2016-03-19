@@ -12,12 +12,8 @@ class AdminRoutes extends Config
         controllerAs: 'admin'
       .when '/admin/config',
         templateUrl: 'app/components/admin/config/config.html'
-        controller: 'adminController'
-        controllerAs: 'admin'
-      .when '/admin/auth',
-        templateUrl: 'app/components/admin/auth/auth.html'
-        controller: 'adminController'
-        controllerAs: 'admin'
+        controller: 'adminConfigController'
+        controllerAs: 'config'
       .when '/admin/test',
         templateUrl: 'app/components/admin/test/test.html'
         controller: 'adminController'

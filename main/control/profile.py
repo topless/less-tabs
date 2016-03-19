@@ -16,7 +16,7 @@ from main import app
 ###############################################################################
 # Profile View
 ###############################################################################
-@app.route('/profile/')
+@app.route('/gaeprofile/')
 @auth.login_required
 def profile():
   user_db = auth.current_user_db()
@@ -44,7 +44,7 @@ class ProfileUpdateForm(wtf.Form):
   )
 
 
-@app.route('/profile/update/', methods=['GET', 'POST'])
+@app.route('/gaeprofile/update/', methods=['GET', 'POST'])
 @auth.login_required
 def profile_update():
   user_db = auth.current_user_db()
@@ -86,7 +86,7 @@ class ProfilePasswordForm(wtf.Form):
   )
 
 
-@app.route('/profile/password/', methods=['GET', 'POST'])
+@app.route('/gaeprofile/password/', methods=['GET', 'POST'])
 @auth.login_required
 def profile_password():
   if not config.CONFIG_DB.has_email_authentication:

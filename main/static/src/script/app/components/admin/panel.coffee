@@ -3,9 +3,6 @@ class GaePanel extends Controller
 
   constructor: ->
     @isAnalyticsCollapsed = true
-    @isSecurityCollapsed = true
-    @isSSLCollpsed = true
-    @isRecaptchaCollapsed = true
 
 
 class AdminPanel extends Directive

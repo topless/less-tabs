@@ -10,7 +10,7 @@ from main import app
 
 
 ###############################################################################
-# Welcome
+# All paths
 ###############################################################################
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -23,6 +23,18 @@ def welcome(path):
     config_db=restful.marshal(config.CONFIG_DB, model.Config.FIELDS),
     user_db=restful.marshal(user_db, model.User.FIELDS) if user_db else None,
   )
+
+
+###############################################################################
+# SSL endpoints more on https://letsencrypt.org/
+###############################################################################
+@app.route('/.well-known/acme-challenge/<string:challenge>')
+def letsencrypt(challenge):
+  response = flask.make_response('oups', 404)
+  if challenge == config.CONFIG_DB.letsencrypt_challenge:
+    response = flask.make_response(config.CONFIG_DB.letsencrypt_response)
+  response.headers['Content-Type'] = 'text/plain'
+  return response
 
 
 #############################################################
