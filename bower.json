@@ -6,12 +6,11 @@
     "angular": "~1",
     "bootstrap": "~3",
     "font-awesome": "~4",
-    "jquery": "~2",
     "moment": "~2"
   },
   "overrides": {
     "angular-bootstrap": {"main": ["*.js"]},
-    "bootstrap": {"main": ["less/**", "fonts/*", "js/*.js"]},
+    "bootstrap": {"main": ["less/**", "fonts/*"]},
     "font-awesome": {"main": ["less/*", "fonts/*"]}
   }
 }
