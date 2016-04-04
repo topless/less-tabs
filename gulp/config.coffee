@@ -8,7 +8,6 @@ config =
     "#{paths.static.ext}/angular-bootstrap/ui-bootstrap.js"
     "#{paths.static.ext}/angular-bootstrap/ui-bootstrap-tpls.js"
     "#{paths.static.ext}/angular-route/angular-route.js"
-    "#{paths.static.ext}/moment/moment.js"
   ]
   style: [
     "#{paths.src.style}/style.less"
