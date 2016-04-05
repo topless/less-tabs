@@ -13,5 +13,5 @@ class Config extends Service
         deferred.resolve(response.data.result)
       , (error) ->
         console.error error
-        deferred.reject('Failed to post config_db')
+        deferred.reject(error)
     return deferred.promise

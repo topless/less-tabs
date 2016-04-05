@@ -13,7 +13,7 @@ class Auth extends Service
         deferred.resolve(response.data.result)
       , (error) ->
         console.error error
-        deferred.reject('Failed to sign in')
+        deferred.reject(error)
     return deferred.promise
 
   signup: (params) ->
@@ -25,5 +25,5 @@ class Auth extends Service
         deferred.resolve(response.data.result)
       , (error) ->
         console.error error
-        deferred.reject('Failed to sign in')
+        deferred.reject(error)
     return deferred.promise
