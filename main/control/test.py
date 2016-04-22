@@ -77,23 +77,22 @@ class TestForm(wtf.Form):
   recaptcha = wtf.RecaptchaField()
 
 
-# NOTE: To be moved under angular controller
-# @app.route('/admin/test/<test>/', methods=['GET', 'POST'])
-# @app.route('/admin/test/', methods=['GET', 'POST'])
-# @auth.admin_required
-# def admin_test(test=None):
-#   if test and test not in TESTS:
-#     flask.abort(404)
-#   form = TestForm()
-#   if form.validate_on_submit():
-#     pass
-#
-#   return flask.render_template(
-#     'test/test_one.html' if test else 'test/test.html',
-#     title='Test: %s' % test.title() if test else 'Test',
-#     html_class='test',
-#     form=form,
-#     test=test,
-#     tests=TESTS,
-#     back_url_for='admin_test' if test else None,
-#   )
+@app.route('/admin/test/<test>/', methods=['GET', 'POST'])
+@app.route('/admin/test/', methods=['GET', 'POST'])
+@auth.admin_required
+def admin_test(test=None):
+  if test and test not in TESTS:
+    flask.abort(404)
+  form = TestForm()
+  if form.validate_on_submit():
+    pass
+
+  return flask.render_template(
+    'admin/test/test_one.html' if test else 'admin/test/test.html',
+    title='Test: %s' % test.title() if test else 'Test',
+    html_class='test',
+    form=form,
+    test=test,
+    tests=TESTS,
+    back_url_for='admin_test' if test else None,
+  )
