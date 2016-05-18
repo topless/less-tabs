@@ -38,7 +38,7 @@
     "gulp-util": "~3",
     "gulp-zip": "~3",
     "main-bower-files": "~2",
-    "minimist": "~1",
+    "yargs-parser": "~2",
     "require-dir": "~0"
   }
 }
