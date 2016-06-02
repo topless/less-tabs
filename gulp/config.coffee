@@ -14,6 +14,7 @@ config =
   ]
   script: [
     "#{paths.src.script}/**/*.coffee"
+    "#{paths.src.script}/**/*.js"
   ]
   templates: [
     "#{paths.src.script}/**/*.html"
