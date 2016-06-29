@@ -3,8 +3,8 @@
 from __future__ import absolute_import
 
 from google.appengine.ext import ndb
-from flask.ext import restful
 import flask
+import flask_restful
 
 from api import helpers
 import auth
@@ -15,7 +15,7 @@ from main import api_v1
 
 
 @api_v1.resource('/user/<string:user_key>/', endpoint='api.user')
-class UserAPI(restful.Resource):
+class UserAPI(flask_restful.Resource):
   def get(self, user_key):
     if not user_key or user_key == 'undefined':
       return flask.abort(401)
@@ -27,7 +27,7 @@ class UserAPI(restful.Resource):
 
 
 @api_v1.resource('/admin/user/', endpoint='api.admin.user.list')
-class AdminUserListAPI(restful.Resource):
+class AdminUserListAPI(flask_restful.Resource):
   @auth.admin_required
   def get(self):
     user_keys = util.param('user_keys', list)
@@ -53,7 +53,7 @@ class AdminUserListAPI(restful.Resource):
 
 
 @api_v1.resource('/admin/user/<string:user_key>/', endpoint='api.admin.user')
-class AdminUserAPI(restful.Resource):
+class AdminUserAPI(flask_restful.Resource):
   @auth.admin_required
   def get(self, user_key):
     user_db = ndb.Key(urlsafe=user_key).get()
