@@ -6,6 +6,8 @@
 .git*
 .hg*
 bower_components
+songs/
+all_songs.json
 main/index.yaml
 main/lib
 main/lib.zip
