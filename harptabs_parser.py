@@ -75,6 +75,8 @@ def parse_song(song_soup):
 
 
 def upload_file(data):
+  # TODO: maybe deploy a backend only for the parsing.
+  prod_url = "https://master-dot-less-tabs.appspot.com/api/v1/songs/"
   url = "http://localhost:8080/api/v1/songs/"
   try:
     r = requests.post(url, json=data)
