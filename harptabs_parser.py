@@ -21,7 +21,8 @@ def main():
     if is_valid:
       print(song_id, result['name'])
       result['harptab_id'] = song_id
-      save_file(result)
+      # save_file(result)
+      upload_file(result)
 
 
 def get_song(song_id):
@@ -56,7 +57,9 @@ def validate(entry):
                                         .replace(u'\xa0', u' ')
                                         .strip())
   if prop_key == 'harp type':
-    return 'harp', prop_value_soup.text.replace(u'\xa0', u' ').lower().strip()
+    return 'harp_type', prop_value_soup.text.replace(u'\xa0', u' ').lower().strip()
+  if prop_key == 'posted by':
+    return 'posted_by', prop_value_soup.text
   if prop_key == 'song':
     # If song validates we are good to go!
     return prop_key, parse_song(prop_value_soup)
@@ -69,6 +72,15 @@ def parse_song(song_soup):
   for item in song_soup.find_all(string=True):
     output = "{}\n{}\n".format(output.strip(), item.replace(u'\u00a0', u' ').strip())
   return output
+
+
+def upload_file(data):
+  url = "http://localhost:8080/api/v1/songs/"
+  try:
+    r = requests.post(url, json=data)
+    print(r.text)
+  except Exception as e:
+    print(e)
 
 
 def save_file(data):
