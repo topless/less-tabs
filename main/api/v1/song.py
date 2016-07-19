@@ -26,7 +26,7 @@ class SongListAPI(restful.Resource):
       harp_key=data['key'],
       harp_type=data['harp_type'],
       posted_by=data['posted_by'].lower(),
-      tab=data['song'],
+      tab=data['song'].strip(),
       harptab_id=data['harptab_id'],
     )
     song_db.put()
