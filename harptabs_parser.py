@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 
 MIN_SONG_ID = 4
+RESUME_ID = 14250
 MAX_SONG_ID = 24205
 PROPERTIES = ["Song Name:", "By:", "Genre:", "Key:", "Harp Type:", "Posted By:", "Song:"]
 
@@ -15,14 +16,17 @@ URL = 'http://www.harptabs.com/'
 
 
 def main():
-  for song_id in range(MIN_SONG_ID, MIN_SONG_ID + 16):
+  counter = 1
+  for song_id in range(RESUME_ID, MIN_SONG_ID + MAX_SONG_ID + 1):
     song_soup = get_song(song_id)
     is_valid, result = get_song_info(song_soup)
     if is_valid:
-      print(song_id, result['name'])
+      if 'name' not in result:
+        result['name'] = 'Untitled'
+      print("{}. {} - {}".format(counter, result['name'], song_id))
       result['harptab_id'] = song_id
-      # save_file(result)
       upload_file(result)
+      counter += 1
 
 
 def get_song(song_id):
@@ -59,7 +63,7 @@ def validate(entry):
   if prop_key == 'harp type':
     return 'harp_type', prop_value_soup.text.replace(u'\xa0', u' ').lower().strip()
   if prop_key == 'posted by':
-    return 'posted_by', prop_value_soup.text
+    return 'posted_by', prop_value_soup.text or 'Unknown'
   if prop_key == 'song':
     # If song validates we are good to go!
     return prop_key, parse_song(prop_value_soup)
@@ -75,12 +79,11 @@ def parse_song(song_soup):
 
 
 def upload_file(data):
-  # TODO: maybe deploy a backend only for the parsing.
-  prod_url = "https://master-dot-less-tabs.appspot.com/api/v1/songs/"
   url = "http://localhost:8080/api/v1/songs/"
+  url = "https://master-dot-less-tabs.appspot.com/api/v1/songs/"
   try:
     r = requests.post(url, json=data)
-    print(r.text)
+    print("Song uploaded {}\n".format(r))
   except Exception as e:
     print(e)
 

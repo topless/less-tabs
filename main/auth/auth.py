@@ -176,6 +176,7 @@ def permission_required(permission=None, methods=None):
 
   return permission_decorator
 
+
 ###############################################################################
 # Sign in stuff
 ###############################################################################
