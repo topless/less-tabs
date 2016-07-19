@@ -7,7 +7,7 @@ class Config extends Service
 
   post: (config_db, params) ->
     deferred = @$q.defer()
-    @$http.post(@Routes('api.config', params), config_db)
+    @$http.post(@Routes('api.admin.config', params), config_db)
       .then (response) =>
         @configDB = response.data.result
         deferred.resolve(response.data.result)
