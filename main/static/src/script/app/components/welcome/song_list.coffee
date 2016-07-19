@@ -47,7 +47,7 @@ class SongListDirective extends Controller
 
   getSongList: (params) ->
     @songListService.get(params).then =>
-      @song_dbs = @song_dbs.concat @songListService.song_dbs
+      @song_dbs.push item for item in @songListService.song_dbs
       @next_cursor = @songListService.next_cursor
 
 
