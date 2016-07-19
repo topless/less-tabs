@@ -20,13 +20,14 @@ class SongListAPI(restful.Resource):
   def post(self):
     data = flask.request.get_json()
     song_db = model.Song(
-      name=data['name'],
-      artist=data['by'],
-      genre=data['genre'],
+      name=data['name'].lower(),
+      artist=data['by'].lower(),
+      genre=data['genre'].lower(),
       harp_key=data['key'],
       harp_type=data['harp_type'],
-      posted_by=data['posted_by'],
-      tab=data['song']
+      posted_by=data['posted_by'].lower(),
+      tab=data['song'],
+      harptab_id=data['harptab_id'],
     )
     song_db.put()
     return helpers.make_response(song_db, model.Song.FIELDS)

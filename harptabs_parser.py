@@ -15,7 +15,7 @@ URL = 'http://www.harptabs.com/'
 
 
 def main():
-  for song_id in range(MIN_SONG_ID, MIN_SONG_ID + 5):
+  for song_id in range(MIN_SONG_ID, MIN_SONG_ID + 16):
     song_soup = get_song(song_id)
     is_valid, result = get_song_info(song_soup)
     if is_valid:

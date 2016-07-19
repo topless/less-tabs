@@ -18,6 +18,7 @@ class Song(model.Base):
   harp_key = ndb.StringProperty()
   harp_type = ndb.StringProperty()
   posted_by = ndb.StringProperty()
+  harptab_id = ndb.IntegerProperty()
 
   FIELDS = {
     'name': fields.String,
@@ -28,6 +29,7 @@ class Song(model.Base):
     'harp_key': fields.String,
     'harp_type': fields.String,
     'posted_by': fields.String,
+    'harptab_id': fields.Integer
   }
 
   FIELDS.update(model.Base.FIELDS)
