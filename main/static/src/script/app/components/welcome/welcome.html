@@ -1,14 +1,5 @@
 
-<div class="jumbotron" ng-if="!welcome.authService.userDB">
-  <h1>
-    <span class="fa fa-fw fa-user-secret"></span> Hello, Anonymous!
-    <a href="/signin" class="btn btn-lg btn-primary">
-      Sign In
-    </a>
-  </h1>
-</div>
-
-<div class="row" ng-if="welcome.authService.userDB">
+<div class="row">
   <div class="col-md-12">
     <song-list></song-list>
   </div>
