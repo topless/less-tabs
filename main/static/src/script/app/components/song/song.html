@@ -9,10 +9,9 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h4><span class="text-muted">Title</span> {{ctrl.song_db.name}}</h4>
-    <h4><span class="text-muted">Artist</span> {{ctrl.song_db.artist}}</h4>
-    <h4><span class="text-muted">Harp type</span> {{ctrl.song_db.harp_type}}</h4>
-    <h4><span class="text-muted">Key</span> {{ctrl.song_db.harp_key}}</h4>
+    <h4><span class="text-muted">title</span> {{ctrl.song_db.name | titlecase}}</h4>
+    <h4><span class="text-muted">artist</span> {{ctrl.song_db.artist | titlecase}}</h4>
+    <h4><span class="text-muted">harmonica</span> {{ctrl.song_db.harp_type}}  #{{ctrl.song_db.harp_key}}</h4>
     <pre>{{ctrl.song_db.tab}}</pre>
   </div>
 </div>

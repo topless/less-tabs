@@ -1,6 +1,6 @@
 
 class Song extends Controller
-  constructor: (songService, @$scope, @$rootScope, $routeParams, @$location) ->
+  constructor: (songService, @$timeout, @$rootScope, $routeParams, @$location) ->
     @song_db = {}
     @$rootScope.$$listeners['keypress:esc'] = []
     @$rootScope.$on 'keypress:esc', @showList
@@ -9,6 +9,6 @@ class Song extends Controller
 
 
   showList: =>
-    console.log 'trigger esc'
-    @$location.path('/')
-    @$scope.$apply()
+    @$timeout( =>
+      @$location.path("/")
+    , 200)
