@@ -2,15 +2,15 @@ template = """
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
-      <th>Artist</th>
       <th>Title</th>
+      <th>Artist</th>
       <th>Key</th>
       <th>Genre</th>
     </thead>
     <tbody>
       <tr ng-repeat="song in ctrl.song_dbs" ng-click="ctrl.showSong(song)">
-        <td>{{song.artist}}</td>
         <td>{{song.name}}</td>
+        <td>{{song.artist}}</td>
         <td>{{song.harp_key}}</td>
         <td>{{song.genre}}</td>
       </tr>
@@ -26,6 +26,7 @@ template = """
   </ul>
 </div>
 """
+
 
 class SongList extends Directive
   constructor: ->
