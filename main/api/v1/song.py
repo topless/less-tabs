@@ -31,3 +31,10 @@ class SongListAPI(restful.Resource):
     )
     song_db.put()
     return helpers.make_response(song_db, model.Song.FIELDS)
+
+
+@api_v1.resource('/song/<int:song_id>', endpoint='api.song')
+class SongAPI(restful.Resource):
+  def get(self, song_id):
+    song_db = model.Song.get_by_id(song_id)
+    return helpers.make_response(song_db, model.Song.FIELDS)

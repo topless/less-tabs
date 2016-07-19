@@ -8,7 +8,7 @@ template = """
       <th>Genre</th>
     </thead>
     <tbody>
-      <tr ng-repeat="song in ctrl.song_dbs">
+      <tr ng-repeat="song in ctrl.song_dbs" ng-click="ctrl.view_song(song)">
         <td>{{song.artist}}</td>
         <td>{{song.name}}</td>
         <td>{{song.harp_key}}</td>
@@ -31,8 +31,12 @@ class SongList extends Directive
 
 
 class SongListDirective extends Controller
-  constructor: (songListService, $scope) ->
+  constructor: ($scope, @$location, songListService) ->
     @song_dbs = []
     songListService.get().then =>
       @song_dbs = songListService.song_dbs
 
+
+  view_song: (song) ->
+    url = "/song/#{song.id}"
+    @$location.path(url)

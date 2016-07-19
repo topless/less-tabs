@@ -13,6 +13,10 @@ class Routes extends Config
         templateUrl: 'app/components/welcome/welcome.html'
         controller: 'welcomeController'
         controllerAs: 'welcome'
+      .when '/song/:song_id',
+        templateUrl: 'app/components/song/song.html'
+        controller: 'songController'
+        controllerAs: 'ctrl'
       .when '/signin',
         templateUrl: 'app/components/signin/signin.html'
         controller: 'signinController'
