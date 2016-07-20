@@ -9,10 +9,10 @@ template = """
     </thead>
     <tbody>
       <tr ng-repeat="song in ctrl.song_dbs" ng-click="ctrl.showSong(song)">
-        <td>{{song.name}}</td>
-        <td>{{song.artist}}</td>
-        <td>{{song.harp_key}}</td>
-        <td>{{song.genre}}</td>
+        <td>{{song.name | titlecase}}</td>
+        <td>{{song.artist | titlecase}}</td>
+        <td>{{song.harp_type | titlecase}} {{song.harp_key}}</td>
+        <td>{{song.genre | titlecase}}</td>
       </tr>
     </tbody>
   </table>
