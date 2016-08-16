@@ -1,0 +1,9 @@
+
+.table-song-list tbody {
+  tr {
+    counter-increment: song-counter;
+    td:nth-child(1):before {
+      content: counter(song-counter);
+    }
+  }
+}

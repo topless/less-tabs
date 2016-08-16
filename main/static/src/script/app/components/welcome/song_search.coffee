@@ -1,5 +1,5 @@
 template = """
-  <div class="col-lg-6">
+  <div class="col-md-6">
     <div class="input-group">
       <input type="text"
           ng-model="songSearch.searchInput"
@@ -7,12 +7,18 @@ template = """
           placeholder="Search for songs or artists..">
 
       <span class="input-group-btn">
-        <a href="#" ng-click="songSearch.search()" class="btn btn-default">Go!</a>
+        <a href="#" ng-click="songSearch.search()" class="btn btn-default">
+          <span class="fa fa-search"></span> search
+        </a>
       </span>
     </div>
   </div>
 
-  <a href="#" ng-click="songSearch.clear()" class="btn btn-default">Clear!</a>
+  <div class="col-md-6">
+    <a href="#" ng-click="songSearch.clear()" ng-disabled="!songSearch.hasSearchResults" class="btn btn-default pull-right">
+      <span class="fa fa-times"></span> clear
+    </a>
+  </div>
 """
 
 

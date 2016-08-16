@@ -1,8 +1,9 @@
 template = """
 <div class="col-md-12">
   <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover table-song-list">
       <thead>
+        <th>#</th>
         <th>Title</th>
         <th>Artist</th>
         <th>Key</th>
@@ -10,6 +11,7 @@ template = """
       </thead>
       <tbody>
         <tr ng-repeat="song in songList.song_dbs" ng-click="songList.showSong(song)">
+          <td>.</td>
           <td>{{song.name | titlecase}}</td>
           <td>{{song.artist | titlecase}}</td>
           <td>{{song.harp_type | titlecase}} {{song.harp_key}}</td>
@@ -55,6 +57,7 @@ class SongListDirective extends Controller
     @$rootScope.$on 'search:result', @updateList
     @$rootScope.$$listeners['search:clear'] = []
     @$rootScope.$on 'search:clear', =>
+      @hasSearchResult = false
       @song_dbs = []
       @next_cursor = ''
       @getSongList()
