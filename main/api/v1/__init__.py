@@ -5,3 +5,4 @@ from .config import *
 from .user import *
 from .song import *
 from .feedback import *
+from .search import *
