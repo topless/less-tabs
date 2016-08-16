@@ -79,7 +79,7 @@ class UserUpdateForm(flask_wtf.Form):
     super(UserUpdateForm, self).__init__(*args, **kwds)
     self.permissions.choices = [
       (p, p) for p in sorted(UserUpdateForm._permission_choices)
-      ]
+    ]
 
   @auth.permission_registered.connect
   def _permission_registered_callback(sender, permission):

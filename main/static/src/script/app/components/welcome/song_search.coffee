@@ -6,7 +6,7 @@ template = """
           ng-model="songSearch.searchInput"
           class="form-control"
           placeholder="Search for songs or artists..">
-      <p class="help-block"><kbd>Enter</kbd> submit&nbsp;&nbsp;<kbd>ESC</kbd> clear</p>
+      <p class="help-block"><kbd>Enter</kbd> to submit&nbsp;&nbsp;<kbd>ESC</kbd> to clear</p>
     </div>
   </div>
 
