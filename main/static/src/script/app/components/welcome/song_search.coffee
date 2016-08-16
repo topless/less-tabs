@@ -2,6 +2,7 @@ template = """
   <div class="col-md-6">
     <div class="form-group">
       <input type="text"
+          autofocus
           ng-model="songSearch.searchInput"
           class="form-control"
           placeholder="Search for songs or artists..">
