@@ -44,7 +44,7 @@ class SongList extends Directive
 
 
 class SongListDirective extends Controller
-  constructor: ($scope, @$rootScope, @$location, @songListService) ->
+  constructor: ($scope, @$timeout, @$rootScope, @$location, @songListService) ->
     @hasSearchResult = false
     @song_dbs = []
     @next_cursor = ''
@@ -56,11 +56,16 @@ class SongListDirective extends Controller
     @$rootScope.$$listeners['search:result'] = []
     @$rootScope.$on 'search:result', @updateList
     @$rootScope.$$listeners['search:clear'] = []
-    @$rootScope.$on 'search:clear', =>
-      @hasSearchResult = false
-      @song_dbs = []
-      @next_cursor = ''
+    @$rootScope.$on 'search:clear', @searchClear
+
+
+  searchClear: =>
+    @song_dbs = []
+    @hasSearchResult = false
+    @next_cursor = ''
+    @$timeout( =>
       @getSongList()
+    , 100)
 
 
   updateList: =>

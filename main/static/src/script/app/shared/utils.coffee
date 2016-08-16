@@ -1,4 +1,6 @@
+
 ESC = 27
+ENTER = 13
 
 
 class KeypressEvents extends Directive
@@ -9,7 +11,9 @@ class KeypressEvents extends Directive
       link: ->
         $document.bind 'keydown', (e) ->
           if e.which is ESC then $rootScope.$broadcast('keypress:esc', e)
+          if e.which is ENTER then $rootScope.$broadcast('keypress:enter', e)
     }
+
 
 class Titlecase extends Filter
   constructor: ->

@@ -1,21 +1,16 @@
 template = """
   <div class="col-md-6">
-    <div class="input-group">
+    <div class="form-group">
       <input type="text"
           ng-model="songSearch.searchInput"
           class="form-control"
           placeholder="Search for songs or artists..">
-
-      <span class="input-group-btn">
-        <a href="#" ng-click="songSearch.search()" class="btn btn-default">
-          <span class="fa fa-search"></span> search
-        </a>
-      </span>
+      <p class="help-block"><kbd>Enter</kbd> submit&nbsp;&nbsp;<kbd>ESC</kbd> clear</p>
     </div>
   </div>
 
   <div class="col-md-6">
-    <a href="#" ng-click="songSearch.clear()" ng-disabled="!songSearch.hasSearchResults" class="btn btn-default pull-right">
+    <a href="#" ng-click="songSearch.clear()" ng-disabled="!songSearch.hasSearchResults" class="search-clear btn btn-default pull-right">
       <span class="fa fa-times"></span> clear
     </a>
   </div>
@@ -38,24 +33,24 @@ class SongSearchDirective extends Controller
     @listen()
     @hasSearchResults = false
     @searchInput = ''
-    @next_url = ''
 
 
   listen: ->
     @$rootScope.$$listeners['keypress:esc'] = []
+    @$rootScope.$$listeners['keypress:enter'] = []
     @$rootScope.$on 'keypress:esc', @clear
+    @$rootScope.$on 'keypress:enter', @search
 
 
-  search: ->
+  search: =>
     return unless @searchInput
     @songListService.search(search: @searchInput).then =>
       @hasSearchResults = true
-      @next_url = @songListService.search_next_url
 
 
   clear: =>
     return unless @hasSearchResults
-    @hasSearchResults = false
     @searchInput = ''
+    @hasSearchResults = false
     @$rootScope.$broadcast 'search:clear'
 
