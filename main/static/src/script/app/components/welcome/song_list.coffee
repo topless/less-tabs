@@ -1,29 +1,31 @@
 template = """
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-      <th>Title</th>
-      <th>Artist</th>
-      <th>Key</th>
-      <th>Genre</th>
-    </thead>
-    <tbody>
-      <tr ng-repeat="song in ctrl.song_dbs" ng-click="ctrl.showSong(song)">
-        <td>{{song.name | titlecase}}</td>
-        <td>{{song.artist | titlecase}}</td>
-        <td>{{song.harp_type | titlecase}} {{song.harp_key}}</td>
-        <td>{{song.genre | titlecase}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="col-md-12">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Key</th>
+        <th>Genre</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="song in songList.song_dbs" ng-click="songList.showSong(song)">
+          <td>{{song.name | titlecase}}</td>
+          <td>{{song.artist | titlecase}}</td>
+          <td>{{song.harp_type | titlecase}} {{song.harp_key}}</td>
+          <td>{{song.genre | titlecase}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-  <ul class="pager" ng-if="ctrl.next_cursor">
-    <li>
-      <a href="#" ng-click="ctrl.getSongList({cursor: ctrl.next_cursor})">
-        More <span class="fa fa-long-arrow-down"></span>
-      </a>
-    </li>
-  </ul>
+    <ul class="pager" ng-if="songList.next_cursor">
+      <li>
+        <a href="#" ng-click="songList.getSongList({cursor: songList.next_cursor})">
+          More <span class="fa fa-long-arrow-down"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 """
 
@@ -35,18 +37,35 @@ class SongList extends Directive
       template: template
       bindToController: true
       controller: 'songListDirectiveController'
-      controllerAs: 'ctrl'
+      controllerAs: 'songList'
     return songList
 
 
 class SongListDirective extends Controller
-  constructor: ($scope, @$location, @songListService) ->
+  constructor: ($scope, @$rootScope, @$location, @songListService) ->
     @song_dbs = []
     @next_cursor = ''
+    @listen()
     @getSongList()
 
 
-  getSongList: (params) ->
+  listen: ->
+    @$rootScope.$$listeners['search:result'] = []
+    @$rootScope.$on 'search:result', @updateList
+    @$rootScope.$$listeners['search:clear'] = []
+    @$rootScope.$on 'search:clear', =>
+      @song_dbs = []
+      @next_cursor = ''
+      @getSongList()
+
+
+  updateList: =>
+    @song_dbs = []
+    @song_dbs.push item for item in @songListService.song_dbs
+    @next_cursor = @songListService.next_cursor
+
+
+  getSongList: (params) =>
     @songListService.get(params).then =>
       @song_dbs.push item for item in @songListService.song_dbs
       @next_cursor = @songListService.next_cursor
