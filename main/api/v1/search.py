@@ -10,9 +10,9 @@ import flask
 import flask_restful
 from api import helpers
 import model
+import config
 import util
 from main import api_v1
-
 
 _INDEX_NAME = 'song_search'
 
@@ -22,7 +22,15 @@ class SearchAPI(flask_restful.Resource):
   def get(self):
     query_str = ' AND '.join(util.param('search').split())
     query = "name:{0} OR artist: {0}".format(query_str)
-    results = search.Index(name=_INDEX_NAME).search(search.Query(query_string=query))
+    options = search.QueryOptions(
+      limit=util.param('limit', int) or config.DEFAULT_DB_LIMIT,
+    )
+
+    results = search.Index(name=_INDEX_NAME).search(search.Query(
+      query_string=query,
+      options=options
+    ))
+
     song_keys = [ndb.Key(urlsafe=res.doc_id) for res in results.results]
     song_dbs = ndb.get_multi(song_keys)
     return helpers.make_response(song_dbs, model.Song.FIELDS)

@@ -18,7 +18,7 @@ template = """
       </tbody>
     </table>
 
-    <ul class="pager" ng-if="songList.next_cursor">
+    <ul class="pager" ng-if="(songList.next_cursor && !songList.hasSearchResult)">
       <li>
         <a href="#" ng-click="songList.getSongList({cursor: songList.next_cursor})">
           More <span class="fa fa-long-arrow-down"></span>
@@ -43,6 +43,7 @@ class SongList extends Directive
 
 class SongListDirective extends Controller
   constructor: ($scope, @$rootScope, @$location, @songListService) ->
+    @hasSearchResult = false
     @song_dbs = []
     @next_cursor = ''
     @listen()
@@ -60,6 +61,7 @@ class SongListDirective extends Controller
 
 
   updateList: =>
+    @hasSearchResult = true
     @song_dbs = []
     @song_dbs.push item for item in @songListService.song_dbs
     @next_cursor = @songListService.next_cursor

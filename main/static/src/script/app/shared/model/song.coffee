@@ -5,12 +5,13 @@ class SongList extends Service
     @Routes = flask_util.url_for
     @song_dbs = []
     @next_cursor = ''
+    @search_next_url = ''
 
 
   get: (config_db, params) ->
     params = angular.extend {}, params, @$routeParams
     deferred = @$q.defer()
-    @$http.get(@Routes('api.song_list'), params: params, cache=true)
+    @$http.get(@Routes('api.song_list', cursor: @next_cursor), params: params, cache=true)
       .then (response) =>
         @song_dbs = response.data.result
         @next_cursor = ''
@@ -23,15 +24,13 @@ class SongList extends Service
     return deferred.promise
 
 
-  search: (searchInput, params) ->
+  search: (params) ->
     params = angular.extend {}, params, @$routeParams
+    params.limit = 1000
     deferred = @$q.defer()
-    @$http.get(@Routes('api.search', search: searchInput), params: params, cache=true)
+    @$http.get(@Routes('api.search', params), cache=true)
       .then (response) =>
         @song_dbs = response.data.result
-        @next_cursor = ''
-        if response.data.next_cursor?
-          @next_cursor = response.data.next_cursor
         @$rootScope.$broadcast 'search:result'
         deferred.resolve(response.data.result)
       , (error) ->

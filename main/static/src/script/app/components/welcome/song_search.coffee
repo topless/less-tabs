@@ -5,8 +5,9 @@ template = """
           ng-model="songSearch.searchInput"
           class="form-control"
           placeholder="Search for songs or artists..">
+
       <span class="input-group-btn">
-        <a href="#" ng-click="songSearch.search({cursor: songSearch.next_cursor})" class="btn btn-default">Go!</a>
+        <a href="#" ng-click="songSearch.search()" class="btn btn-default">Go!</a>
       </span>
     </div>
   </div>
@@ -31,7 +32,7 @@ class SongSearchDirective extends Controller
     @listen()
     @hasSearchResults = false
     @searchInput = ''
-    @next_cursor = ''
+    @next_url = ''
 
 
   listen: ->
@@ -41,9 +42,9 @@ class SongSearchDirective extends Controller
 
   search: ->
     return unless @searchInput
-    @songListService.search(@searchInput).then =>
+    @songListService.search(search: @searchInput).then =>
       @hasSearchResults = true
-      @next_cursor = @songListService.next_cursor
+      @next_url = @songListService.search_next_url
 
 
   clear: =>
