@@ -16,7 +16,7 @@ class Routes extends Config
       .when '/song/:song_id',
         templateUrl: 'app/components/song/song.html'
         controller: 'songController'
-        controllerAs: 'ctrl'
+        controllerAs: 'song'
       .when '/signin',
         templateUrl: 'app/components/signin/signin.html'
         controller: 'signinController'

@@ -1,17 +1,42 @@
 
 <div class="row">
   <div class="col-md-12">
-    <a ng-click="ctrl.showList()" class="close-btn pull-right" title="Show list (ESC)">
-      <span class="fa fa-times fa-3x"></span>
+    <a ng-click="song.showList()" class="close-btn pull-right" title="Show list (ESC)">
+      <span class="fa fa-times fa-2x"></span>
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>
+      <div ng-if="song.isEditable" class="input-group">
+        <span class="input-group-addon">Title</span>
+        <input type="text" class="form-control" value="{{song.song_db.name}}" placeholder="type song title">
+      </div>
+
+      <span ng-if="!song.isEditable" class="text-muted">Title</span>
+      <span ng-if="!song.isEditable">{{song.song_db.name | titlecase}}</span>
+    </h4>
+    <h4><span class="text-muted">artist</span> {{song.song_db.artist | titlecase}}</h4>
+    <h4><span class="text-muted">harmonica</span> {{song.song_db.harp_type}}  #{{song.song_db.harp_key}}</h4>
+  </div>
+
+  <div class="col-md-6">
+    <a ng-if="song.authService.userDB && !song.isEditable" ng-click="song.isEditable = !song.isEditable" class="close-btn pull-right" title="Edit item">
+      <span class="fa fa-pencil fa-2x"></span>
     </a>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <h4><span class="text-muted">title</span> {{ctrl.song_db.name | titlecase}}</h4>
-    <h4><span class="text-muted">artist</span> {{ctrl.song_db.artist | titlecase}}</h4>
-    <h4><span class="text-muted">harmonica</span> {{ctrl.song_db.harp_type}}  #{{ctrl.song_db.harp_key}}</h4>
-    <pre>{{ctrl.song_db.tab}}</pre>
+    <pre>{{song.song_db.tab}}</pre>
+  </div>
+</div>
+
+<div class="row" ng-if="song.isEditable">
+  <div class="col-md-12">
+    <a href="" class="btn btn-primary">Save</a>
   </div>
 </div>

@@ -1,7 +1,8 @@
 
 class Song extends Controller
-  constructor: (songService, @$timeout, @$rootScope, $routeParams, @$location) ->
+  constructor: (songService, @$timeout, @$rootScope, $routeParams, @$location, @authService) ->
     @song_db = {}
+    @isEditable = false
     @$rootScope.$$listeners['keypress:esc'] = []
     @$rootScope.$on 'keypress:esc', @showList
     songService.get($routeParams).then =>
