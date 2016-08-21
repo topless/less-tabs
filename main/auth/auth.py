@@ -286,7 +286,7 @@ def signup():
 @app.route('/signout/')
 def signout():
   flask_login.logout_user()
-  return flask.redirect(util.param('next') or flask.url_for('welcome'))
+  return flask.redirect(util.param('next'))
 
 
 ###############################################################################
