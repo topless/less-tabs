@@ -37,7 +37,7 @@ def param(name, cast=None):
 
 def get_next_url(next_url=''):
   args = parser.parse({
-    'next': wf.Str(missing='welcome'), 'next_url': wf.Str(missing=None)
+    'next': wf.Str(missing='/'), 'next_url': wf.Str(missing=None)
   })
   next_url = next_url or args['next'] or args['next_url']
   do_not_redirect_urls = [flask.url_for(u) for u in [
