@@ -198,37 +198,38 @@ class SignInForm(flask_wtf.Form):
   next_url = wtforms.HiddenField()
 
 
-@app.route('/signin/', methods=['GET', 'POST'])
-def signin():
-  next_url = util.get_next_url()
-  form = None
-  if config.CONFIG_DB.has_email_authentication:
-    form = form_with_recaptcha(SignInForm())
-    save_request_params()
-    if form.validate_on_submit():
-      result = get_user_db_from_email(form.email.data, form.password.data)
-      if result:
-        cache.reset_auth_attempt()
-        return signin_user_db(result)
-      if result is None:
-        form.email.errors.append('Email or Password do not match')
-      if result is False:
-        return flask.redirect(flask.url_for('welcome'))
-    if not form.errors:
-      form.next_url.data = next_url
+# TODO: Deprecated, we render JS template
+# @app.route('/signin/', methods=['GET', 'POST'])
+# def signin():
+#   next_url = util.get_next_url()
+#   form = None
+#   if config.CONFIG_DB.has_email_authentication:
+#     form = form_with_recaptcha(SignInForm())
+#     save_request_params()
+#     if form.validate_on_submit():
+#       result = get_user_db_from_email(form.email.data, form.password.data)
+#       if result:
+#         cache.reset_auth_attempt()
+#         return signin_user_db(result)
+#       if result is None:
+#         form.email.errors.append('Email or Password do not match')
+#       if result is False:
+#         return flask.redirect(flask.url_for('welcome'))
+#     if not form.errors:
+#       form.next_url.data = next_url
 
-  if form and form.errors:
-    cache.bump_auth_attempt()
+#   if form and form.errors:
+#     cache.bump_auth_attempt()
 
-  return flask.render_template(
-    'auth/auth.html',
-    title='Sign in',
-    html_class='auth',
-    next_url=next_url,
-    form=form,
-    form_type='signin' if config.CONFIG_DB.has_email_authentication else '',
-    **urls_for_oauth(next_url)
-  )
+#   return flask.render_template(
+#     'auth/auth.html',
+#     title='Sign in',
+#     html_class='auth',
+#     next_url=next_url,
+#     form=form,
+#     form_type='signin' if config.CONFIG_DB.has_email_authentication else '',
+#     **urls_for_oauth(next_url)
+#   )
 
 
 ###############################################################################
