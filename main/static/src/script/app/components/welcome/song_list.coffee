@@ -1,32 +1,34 @@
 template = """
-<div class="col-md-12">
-  <div class="table-responsive">
-    <table class="table table-hover table-song-list">
-      <thead>
-        <th>#</th>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Key</th>
-        <th>Genre</th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="song in songList.song_dbs" ng-click="songList.showSong(song)">
-          <td>.</td>
-          <td>{{song.name | titlecase}}</td>
-          <td>{{song.artist | titlecase}}</td>
-          <td>{{song.harp_type | titlecase}} {{song.harp_key}}</td>
-          <td>{{song.genre | titlecase}}</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-hover table-song-list">
+        <thead>
+          <th>#</th>
+          <th>Title</th>
+          <th>Artist</th>
+          <th>Key</th>
+          <th>Genre</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="song in songList.song_dbs" ng-click="songList.showSong(song)">
+            <td>.</td>
+            <td>{{song.name | titlecase}}</td>
+            <td>{{song.artist | titlecase}}</td>
+            <td>{{song.harp_type | titlecase}} {{song.harp_key}}</td>
+            <td>{{song.genre | titlecase}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <ul class="pager" ng-if="(songList.next_cursor && !songList.hasSearchResult)">
-      <li>
-        <a href="#" ng-click="songList.getSongList({cursor: songList.next_cursor})">
-          More <span class="fa fa-long-arrow-down"></span>
-        </a>
-      </li>
-    </ul>
+      <ul class="pager" ng-if="(songList.next_cursor && !songList.hasSearchResult)">
+        <li>
+          <a href="#" ng-click="songList.getSongList({cursor: songList.next_cursor})">
+            More <span class="fa fa-long-arrow-down"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 """

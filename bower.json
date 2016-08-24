@@ -5,10 +5,12 @@
     "angular-bootstrap": "~0",
     "angular-route": "~1",
     "bootstrap": "~3",
+    "bootswatch": "~3",
     "font-awesome": "~4"
   },
   "overrides": {
     "bootstrap": {"main": ["less/**", "fonts/*"]},
+    "bootswatch": {"main": ["**/*.less"]},
     "font-awesome": {"main": ["less/*", "fonts/*"]}
   }
 }

@@ -1,20 +1,27 @@
 template = """
-  <div class="col-md-6">
-    <div class="form-group">
-      <input type="text"
-          autofocus
-          ng-model="songSearch.searchInput"
-          class="form-control"
-          placeholder="Search for songs or artists..">
-      <p class="help-block"><kbd>Enter</kbd> to submit&nbsp;&nbsp;<kbd>ESC</kbd> to clear</p>
+<section id="search">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group">
+        <input ng-model="songSearch.searchInput" placeholder="Search for songs or artists.."
+            class="form-control" type="text" autofocus>
+
+        <span class="input-group-btn">
+
+          <button ng-click="songSearch.search()" class="btn btn-default" type="button">
+            <span class="fa fa-search"></span>
+          </button>
+
+          <button ng-click="songSearch.clear()" class="btn btn-default" type="button">
+            <span class="fa fa-times"></span>
+          </button>
+
+        </span>
+      </div>
+      <p class="help-block text-center"><kbd>Enter</kbd> to submit&nbsp;&nbsp;<kbd>ESC</kbd> to clear</p>
     </div>
   </div>
-
-  <div class="col-md-6">
-    <a href="#" ng-click="songSearch.clear()" ng-disabled="!songSearch.hasSearchResults" class="search-clear btn btn-default pull-right">
-      <span class="fa fa-times"></span> clear
-    </a>
-  </div>
+</section>
 """
 
 

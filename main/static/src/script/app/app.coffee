@@ -10,7 +10,10 @@ class Routes extends Config
   constructor: ($routeProvider) ->
     $routeProvider
       .when '/',
-        templateUrl: 'app/components/welcome/welcome.html'
+        template: '
+          <song-search></song-search>
+          <song-list></song-list>
+        '
         controller: 'welcomeController'
         controllerAs: 'welcome'
       .when '/song/:song_id',
