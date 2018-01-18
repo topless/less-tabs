@@ -4,7 +4,6 @@ ENTER = 13
 
 
 class KeypressEvents extends Directive
-
   constructor: ($document, $rootScope) ->
     return {
       restrict: 'A'
